@@ -9,8 +9,8 @@ before_install:
   - pear install pear/PHP_CodeSniffer
   - phpenv rehash
 
-install:
-    - composer install --no-dev --no-scripts --quiet --optimize-autoloader
+install: composer install --no-dev --no-scripts --quiet --optimize-autoloader
 
-script:
-  - phpcs --standard=ruleset.xml --extensions=php --ignore=web/wp/,web/app/plugins/,vendor/ -n -s .
+before_script: composer require atoum/atoum
+
+script: vendor/bin/atoum
