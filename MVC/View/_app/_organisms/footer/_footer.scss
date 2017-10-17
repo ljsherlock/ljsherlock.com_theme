@@ -1,0 +1,64 @@
+%footer
+{
+    position: relative;
+    padding-top: 10em;
+
+    %logo
+    {
+        position: absolute;
+        top: -3.4em;
+    }
+
+    @extend %grid;
+    @extend %grid--col;
+    @extend %grid--gutter-sm-bottom;
+    @extend %flex--align-items-center;
+
+    %footer__contact
+    {
+        @extend %grid;
+        @extend %grid--col;
+        @extend %grid--gutter-xs-bottom;
+        @extend %flex--align-items-center;
+    }
+
+    %footer__recent-posts
+    {
+        @extend %wrap--break-lg;
+        %posts
+        {
+            @extend %grid;
+            @extend %grid--col;
+            @extend %grid--gutter-xs-bottom;
+            @extend %flex--align-items-center;
+            %posts__post
+            {
+                %btn
+                {
+                    // @extend %btn--line-below;
+                }
+            }
+        }
+    }
+
+    %footer__copyright
+    {
+        @extend %grid;
+        @extend %grid-desktop--gutter-lg-right;
+        @extend %grid-tablet--gutter-lg-right;
+        @extend %grid-mobile--col;
+        @extend %grid-mobile--gutter-sm-bottom;
+    }
+
+    background-color: $tundora;
+}
+
+footer { @extend %footer; }
+.footer__contact { @extend %footer__contact; }
+.footer__recent-posts { @extend %footer__recent-posts; }
+.footer__copyright { @extend %footer__copyright; }
+
+.logo { @extend %logo; }
+.btn { @extend %btn; }
+.posts { @extend %posts; }
+// .posts__post { @extend %posts__post; }

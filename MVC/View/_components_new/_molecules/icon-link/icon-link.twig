@@ -1,0 +1,46 @@
+{#
+   _components/_molecules/icon--link/icon--link.twig
+   Icon Link
+   An icon which is used as a link
+
+   @param {Array} bem ()
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs ()
+      {
+         Mixed
+      }
+   @param {String} icon
+   @param {String} href
+#}
+
+{# Parameters #}
+{% set iconLinkBem = bem ?? null %}
+{% set iconLinkAttrs = attrs ?? null %}
+{% set iconLinkID = icon ?? null %}
+{% set iconLinkHref = href ?? null %}
+
+
+{# Variables #}
+{% set iconID = 'use--' ~ iconName %}
+{% if iconBem is defined and iconBem is iterable %}
+   {% set iconSvgBem = [ {block: 'icon', modifier: ['link']} ]| merge( iconBem )  %}
+{% else %}
+   {% set iconSvgBem = [ {block: 'icon', modifier: ['link']} ]  %}
+{% endif %}
+
+{# Output #}
+{% if iconLinkID != null %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set iconLinkInnerHTML %}
+      {% include '_atoms/icon/icon.twig' with { icon : iconLinkID, bem: [ { block: "symbol", modifier: [iconLinkID] } ] } %}
+   {% endset %}
+
+   {{ mcro.createHTMLTag('a', { href: iconLinkHref }, [], iconLinkInnerHTML ) }}
+
+{% endif %}

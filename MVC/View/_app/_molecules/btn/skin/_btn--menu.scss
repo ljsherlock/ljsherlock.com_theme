@@ -1,0 +1,9 @@
+%btn--menu
+{
+    color: $tundora;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.8rem
+}
+
+.btn--menu { @extend %btn--menu;}

@@ -1,0 +1,101 @@
+{# _pages/single/work.twig #}
+
+{#
+   Single Work Page
+   @param {Term Obj} what_i_did
+      {
+         children {Array}
+         {
+            {Term Ojb}
+         }
+      }
+   @param {Array} colours
+      {
+         {String} name
+         {String} hex
+      }
+   @param {Array} project_colours
+   @param {String} browser_image
+   @param {String} primary_image
+   @param {Array} secondary_images
+#}
+
+{# Parameters #}
+{% set workPost = post ?? null %}
+{% set workWhatIDid = what_i_did.children ?? null %}
+{% set workBuiltWith = builtWith.children ?? null %}
+{% set workProjectColours = project_colours ?? null %}
+{% set workBrowserImage = browser_image ?? null %}
+{% set workPrimaryImage = primary_image ?? null %}
+{% set workSecondaryImages = secondary_images ?? null %}
+
+{# Varables #}
+
+{# Output #}
+{% extends '_app/_templates/app.twig' %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% block app %}
+
+      {% embed '_molecules/page-header/page-header.twig' with { title: post.title } %}
+
+         {% block subtitle %}
+            {% include '_organisms/terms/terms.twig' with { post_type: 'work', terms: overview.children, bem: [] } %}
+         {% endblock %}
+
+      {% endembed %}
+
+      <section id="browser-image" class="wrap--break-lg">
+         {% include '_molecules/browser-mockup/browser-mockup.twig' with { attrs: {}, bem: [], image: workBrowserImage } %}
+      </section>
+
+      <div class="wrap--sm wrap--break-lg">
+
+         <section class="case-study">
+            <div class="typography">
+                  {{ workPost.content }}
+            </div>
+         </section>
+
+         <section id="project-colour" class="wrap--break-md">
+            <div class="typography">
+               {{ mcro.createHTMLTag('h2', {}, [],  'Project Colours') }}
+            </div>
+            {% include '_organisms/colours/colours.twig' with { colours: workProjectColours } %}
+         </section>
+
+         <section id="what-i-did" class="wrap--break-md">
+            <div class="typography">
+               {{ mcro.createHTMLTag('h2', {}, [],  'What I Did') }}
+            </div>
+            {% include '_organisms/terms/terms.twig' with { post_type: 'work', terms: workWhatIDid, bem: [{ block: 'nav', modifier: ['what-i-did'] }] } %}
+         </section>
+
+         <section id="built-with" class="wrap--break-md">
+            <div class="typography">
+               {{ mcro.createHTMLTag('h2', {}, [],  'Built with') }}
+            </div>
+            {% include '_organisms/terms/terms.twig' with { post_type: 'work', terms: workBuiltWith, bem: [{ block: 'nav', modifier: ['what-i-did'] }] } %}
+         </section>
+
+      </div>
+
+      <div class="wrap--rg">
+
+         <section id="project-images" class="wrap--break-md">
+
+            {% include '_organisms/gallery/gallery.twig' with { images: workSecondaryImages, bem: [{ block: 'gallery', modifier: ['project'] }] } %}
+
+         </section>
+
+      </div>
+
+      <div class="wrap--rg wrap--break-md">
+         {% include '_molecules/prev-next-post/prev-next-post.twig' with { prev: post.prev, next: post.next } %}
+      </div>
+
+
+
+
+   {% endblock %}

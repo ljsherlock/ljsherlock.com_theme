@@ -1,0 +1,16 @@
+{
+    "require": {
+        "mobiledetect/mobiledetectlib": "^2.8",
+        "timber/timber": "^1.1",
+        "solution10/calendar": "^1.1",
+        "abraham/twitteroauth": "^0.7.2",
+        "clubduece/custom-sidebars": "^0.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "MVC",
+            "Utils\\" : "Utils",
+            "Includes\\" : "Includes"
+        }
+    }
+}

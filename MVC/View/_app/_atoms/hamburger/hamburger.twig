@@ -1,0 +1,20 @@
+
+{# Variables #}
+{% set galleryBemDefault = [{ block: 'gallery'}] %}
+{% set galleryBem = ( galleryBem ) ? galleryBem|merge( galleryBemDefault ) : galleryBemDefault %}
+
+{% set hamburgerLayerBem = [{block: 'hamburger', element: 'layer'}] %}
+
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+{% set hamburgerInnerHTML %}
+
+   {{ mcro.createHTMLTag('div', {}, hamburgerLayerBem) }}
+   {{ mcro.createHTMLTag('div', {}, hamburgerLayerBem) }}
+   {{ mcro.createHTMLTag('div', {}, hamburgerLayerBem) }}
+
+{% endset %}
+
+{{ mcro.createHTMLTag('div', {id : 'hamburger'}, [{ block: 'hamburger' }] , hamburgerInnerHTML) }}

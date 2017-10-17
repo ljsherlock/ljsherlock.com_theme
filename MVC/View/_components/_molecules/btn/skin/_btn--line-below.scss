@@ -1,0 +1,11 @@
+%btn--line-below
+{
+    @extend %btn--naked;
+    @extend %line-below--left-to-right;
+    &:after
+    {
+        height: 4px;
+    }
+}
+
+.btn--line-below { @extend %btn--line-below; }

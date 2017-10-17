@@ -1,0 +1,47 @@
+{# _molecules/heading--prefix/heading--prefix.twig #}
+
+{#
+   Page Header
+   From the menu object create a menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {String} image
+#}
+
+{# Parameters #}
+{% set headingAttrs = attrs ?? null %}
+{% set headingBem = bem ?? null %}
+{% set headingTitle = title ?? null %}
+
+{# Variables #}
+{% set headingBemDefault = [{ block:'heading', modifier: ['prefix'] }] %}
+{% set headingBem = (headingBem) ? headingBem|merge(headingBemDefault) : headingBemDefault %}
+
+{# Output #}
+
+{% import 'macros.twig' as mcro %}
+
+{% set innerHTML %}
+
+   {% block prefix %}
+      {% include '_atoms/icon/icon.twig' with { icon : 'icon-' ~ icon, bem: [ { block: "symbol", modifier: [icon] },
+      { block:'prefix', element: 'icon' } ] } %}
+   {% endblock %}
+   {% block heading %}
+      {{ mcro.createHTMLTag('h1', {}, [], headingTitle) }}
+   {% endblock %}
+   {% block affix %}
+
+   {% endblock %}
+
+{% endset %}
+
+{{ mcro.createHTMLTag('div', headingAttrs, headingBem, innerHTML ) }}

@@ -1,0 +1,61 @@
+// _atoms/overlay/skin/_loading.scss
+
+/*------------------------------------------*\
+*   B E M
+/*------------------------------------------*/
+
+%overlay
+{
+    &%overlay--menu
+    {
+        background: $shilo;
+        opacity: 0;
+        &%overlay--fade
+        {
+            @include animation( .5s ease menu-fade-in forwards );
+        }
+    }
+}
+
+// loading overlay
+@include keyframes (menu-fade-in)
+{
+   0%
+   {
+      opacity: 0;
+      z-index: -1000;
+   }
+   100%
+   {
+       z-index: 1010;
+       opacity: 1;
+   }
+};
+
+// loading overlay
+@include keyframes (fade-out)
+{
+   0%
+   {
+      opacity: 1;
+   }
+   100%
+   {
+       opacity: 0;
+   }
+};
+@include keyframes (fade-in)
+{
+   0%
+   {
+      opacity: 0;
+   }
+   100%
+   {
+       opacity: 1;
+   }
+};
+
+.overlay { @extend %overlay; }
+.overlay--fade { @extend %overlay--fade; }
+.overlay--menu { @extend %overlay--menu; }

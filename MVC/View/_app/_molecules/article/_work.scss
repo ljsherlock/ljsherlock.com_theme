@@ -1,0 +1,23 @@
+%posts--work
+{
+    %post__header
+    {
+        @extend %wrap--rg;
+        @extend %wrap--break-sm;
+    }
+    %post__body
+    {
+        @extend %wrap--md;
+        @extend %grid--col;
+        @extend %grid--gutter-sm-bottom;
+    }
+    %post__footer
+    {
+        @extend %wrap--md;
+    }
+}
+
+.posts--work  { @extend %posts--work  };
+.post__header { @extend %post__header };
+.post__body  { @extend %post__body  };
+.post__footer { @extend %post__footer };

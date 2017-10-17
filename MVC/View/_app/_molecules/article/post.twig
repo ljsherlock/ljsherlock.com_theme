@@ -1,0 +1,49 @@
+{# _components/_molecules/post/post.twig #}
+
+{#
+   Post
+   Default post
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Post Object} post
+   @param {Array} stats
+   @param {String} preview_image
+
+#}
+
+{# Parameters #}
+{% set postBem = bem ?? null %}
+{% set postAttrs = attrs ?? null %}
+{% set postObj = post ?? null %}
+
+{# Variables #}
+{% set postBemDefault = [{ block: 'posts', element: 'post'}] %}
+{% set postBem = (postBem) ? bem|merge( postBemDefault ) : postBemDefault %}
+{% set postAttrs = { href: postObj.link } %}
+
+{# Output #}
+{% if postObj %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set postInnerHTML %}
+      <div class="post__body">
+         {{ mcro.createHTMLTag('h3', {}, [],  postObj.title) }}
+         <div class="typography">
+            {{ mcro.createHTMLTag('p', {}, [], postObj.get_preview(40, false, '') ) }}
+         </div>
+      </div>
+   {% endset %}
+
+   {{ mcro.createHTMLTag( 'a', postAttrs, postBem, postInnerHTML ) }}
+
+
+{% endif %}

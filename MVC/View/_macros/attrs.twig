@@ -1,0 +1,9 @@
+{% macro attrs(args) %}
+{% set attrs_str = '' %}
+{% for key, arg in args %}
+
+{% set attrs_str = '' ~ key %}
+{% set attrs_str = arg != '' ? attrs_str ~ '="' ~ arg ~ '"' : '' %}
+
+{{ attrs_str }}{% endfor %}
+{% endmacro %}

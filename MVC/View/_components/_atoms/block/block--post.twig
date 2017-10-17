@@ -1,0 +1,9 @@
+{#
+	* @desc         Create Blocks!
+	* @name         Block
+	* @author       ljsherlock
+	* @tested       Twig
+	* @requires     component.twig
+#}
+
+{% include '_atoms/block/block.twig' with { innerHTML: post.content } %}

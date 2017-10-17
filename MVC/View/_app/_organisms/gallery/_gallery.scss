@@ -1,0 +1,83 @@
+%gallery
+{
+    @extend %grid--col;
+    &--project
+    {
+        %gallery__image
+        {
+            @extend %wrap--break-lg;
+            width: 100%;
+            height: auto;
+            %gallery__img
+            {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+    &--instagram
+    {
+        // @extend %grid--col;
+        @extend %grid-mobile--col;
+
+
+        @extend %grid-desktop--row;
+        @extend %grid-desktop--continuous;
+
+        @extend %grid-tablet--row;
+        @extend %grid-tablet--continuous;
+
+        %gallery__image
+        {
+            @extend %grid-mobile__100-of-100;
+            @extend %grid-tablet__50-of-100;
+            @extend %grid-desktop__33-of-100;
+            display: block;
+            position: relative;
+            padding: 1rem;
+            @extend %flex;
+            @extend %flex--center;
+            &:before
+            {
+                @include transition(.3s opacity ease-out);
+                content: '';
+                border: 2px solid $shilo;
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                padding: 0rem;
+                margin: 0;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                opacity: 0;
+            }
+            %gallery__img {
+                width: 100%;
+                height: auto;
+            }
+            %gallery__date
+            {
+                display: block;
+                @extend %btn--menu;
+                letter-spacing: 0.07em;
+                text-align: center;
+            }
+            &:hover
+            {
+                &:before {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.gallery { @extend %gallery; }
+.gallery__image { @extend %gallery__image; }
+.gallery__date { @extend %gallery__date; }
+.gallery__img {@extend %gallery__img;}
+.gallery--project { @extend %gallery--project; }
+.gallery--instagram { @extend %gallery--instagram; }

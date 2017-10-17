@@ -1,0 +1,21 @@
+%nav--social-media
+{
+    @extend %grid--gutter-sm-right;
+    %nav__item
+    {
+        fill: $doveGrey;
+        &:hover
+        {
+            fill: $shilo;
+        }
+        %svg
+        {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}
+
+.nav--social-media { @extend %nav--social-media; }
+.nav__item { @extend %nav__item; }
+.icon { @extend %svg; }

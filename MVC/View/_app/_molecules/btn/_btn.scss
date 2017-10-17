@@ -1,0 +1,6 @@
+%btn
+{
+    @include transition( .3s color ease );
+}
+
+.btn { @extend %btn; }

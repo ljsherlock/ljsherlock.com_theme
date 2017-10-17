@@ -1,0 +1,54 @@
+{# _ogranisms/newest-project/newest-project.twig #}
+
+{#
+   Newest Project
+   Show the first Item in Work Posts
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Post Object} work
+   {
+      Mixed
+   }
+#}
+
+{# Parameters #}
+{% set newestProjectAttrs = attrs ?? null %}
+{% set newestProjectBem = bem ?? null %}
+{% set newestProjectPosts = work ?? null %}
+
+{# Variables #}
+{% set newestProjectPostsTemplate = '_molecules/article/work.twig' %}
+{% set newestProjectPostsBem = [ { block: 'newest-project', element: 'body' }, { block: 'posts', modifier: ['work'] }] %}
+
+{# Output #}
+{% if newestProjectPosts %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set newestProjectInnerHTML %}
+
+      {% include '_organisms/posts/posts.twig' with {
+      posts: newestProjectPosts,
+      template: newestProjectPostsTemplate,
+      bem: newestProjectPostsBem } %}
+
+      <div class="newest-project__footer">
+         {% include '_molecules/btn/btn.twig' with {
+         attrs: { href: constant('LJS_URL') ~ 'work' },
+         text: { value: 'View All Projects'},
+         bem: [ {block: 'btn', modifier: ['primary']} ] } %}
+      </div>
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag('div', newestProjectAttrs, [{block:'newest-project'}], newestProjectInnerHTML) }}
+
+{% endif %}

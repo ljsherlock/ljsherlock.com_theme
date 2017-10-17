@@ -1,0 +1,75 @@
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+@mixin transform($val) {
+  -webkit-transform: $val;
+  -moz-transform: $val;
+  -ms-transform: $val;
+  transform: $val;
+}
+
+@mixin rotate( $val ) {
+  -webkit-transform: rotate($val);
+  -moz-transform: rotate($val);
+  -ms-transform: rotate($val);
+  -o-transform: rotate($val);
+  transform: rotate($val);
+}
+
+@mixin transition-delay( $val ) {
+  -webkit-transition-delay: $val;
+  -moz-transition-delay:$val;
+  -o-transition-delay:$val;
+  -ms-transition-delay:$val;
+  transition-delay:$val;
+}
+
+@mixin transform-origin($val) {
+  -webkit-transform-origin: $val;
+  -moz-transform-origin: $val;
+  -ms-transform-origin: $val;
+  transform-origin: $val;
+}
+
+@mixin transform-style($val) {
+  -webkit-transform-style: $val;
+  -moz-transform-style: $val;
+  -ms-transform-style: $val;
+  transform-style: $val;
+}
+
+@mixin perspective($val) {
+  -webkit-perspective: $val;
+  -moz-perspective: $val;
+  -ms-perspective: $val;
+  perspective: $val;
+}
+
+@mixin perspective-origin($val){
+  -webkit-perspective-origin: $val;
+  -moz-perspective-origin: $val;
+  -ms-perspective-origin: $val;
+  perspective-origin: $val;
+}
+
+@mixin animation( $value... ) {
+  -webkit-animation:$value;
+  -moz-animation:$value;
+  -o-animation:$value;
+  -ms-animation:$value;
+  animation:$value;
+}
+
+@mixin keyframes( $name ) {
+  @-webkit-keyframes #{$name} { @content }
+  @-moz-keyframes #{$name} { @content }
+  @-o-keyframes #{$name} { @content }
+  @-ms-keyframes #{$name} { @content }
+  @keyframes #{$name} { @content }
+}

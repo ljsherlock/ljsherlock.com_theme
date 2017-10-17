@@ -1,0 +1,57 @@
+{# _molecules/page-header/page-header.twig #}
+
+{#
+   Page Header
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {String} title
+   @param {String} subtitle (optional)
+#}
+
+{# Parameters #}
+{% set pageHeaderBem = bem ?? null %}
+{% set pageHeaderAttrs = attrs ?? null %}
+{% set pageHeaderTitle = termName ?? title %}
+{% set pageHeaderSubtitle = subtitle ?? null %}
+
+{# Variables #}
+{% set pageHeaderBemDefault = [{ block : 'page-header'}] %}
+{% set pageHeaderBem = (pageHeaderBem) ? pageHeaderBem|merge(pageHeaderBemDefault) : pageHeaderBemDefault %}
+
+{# Output #}
+{% if pageHeaderTitle %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set pageHeaderInnerHTML %}
+
+      {% block pageHeaderBefore %}{% endblock %}
+
+      {% include '_molecules/heading--prefix/heading--prefix.twig' with { icon: 'heading-prefix', title: pageHeaderTitle } %}
+
+      <div class="page-header__subtitle ">
+
+         <div class="page-header__line">
+
+         </div>
+
+         {% block subtitle %}
+
+            {{ mcro.createHTMLTag('h2', {}, [{block: 'h3'}],  pageHeaderSubtitle) }}
+
+         {% endblock %}
+
+      </div>
+   {% endset %}
+
+   {{ mcro.createHTMLTag('div', pageHeaderAttrs, pageHeaderBem, pageHeaderInnerHTML) }}
+
+{% endif %}

@@ -1,0 +1,54 @@
+/*---------------------------------------------*\
+*    button--naked.scss
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+    %btn--naked {
+        @extend %btn--text;
+        overflow:visible;
+        margin-right:0; // should not be overriding .btn. Fix.
+        &:after {
+            height: 2px;
+            display: block;
+            bottom: -7.5px;
+        }
+        &:hover {
+
+        }
+    }
+
+    %btn--naked-before {
+        @extend %btn--naked;
+        @extend %btn--icon-before;
+        // @extend %line-below-hover;
+    }
+
+    %btn--naked-after {
+        @extend %btn--naked;
+        @extend %btn--icon-after;
+        // @extend %line-below-hover;
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/
+
+    .btn--naked {
+        @extend %btn--naked;
+    }
+
+    .btn--naked-before {
+        @extend %btn--naked-before;
+    }
+
+    .btn--naked-after {
+        @extend %btn--naked-after;
+    }

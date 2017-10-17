@@ -1,0 +1,56 @@
+@mixin adaptive_font( $min_font, $max_font, $line: 1.5 )
+{
+   font-size: calc( #{$min_font}px + (#{$max_font} - #{$min_font}) * ( (100vw - #{map_deep_get($adaptive-font, screen, min)}px) / ( #{ map_deep_get($adaptive-font, screen, max) } - #{map_deep_get($adaptive-font, screen, min)}) ) );
+
+   line-height: calc( (#{$min_font}px + (#{$max_font} - #{$min_font}) * ( (100vw - #{map_deep_get($adaptive-font, screen, min)}px) / ( #{ map_deep_get($adaptive-font, screen, max) } - #{map_deep_get($adaptive-font, screen, min)}) ) ) * #{$line} );
+}
+
+@mixin adaptive-root-font-size()
+{
+    @media (max-width: #{map_deep_get($adaptive-font, screen, min)}px)
+    {
+        %root
+        {
+            font-size: #{map_deep_get($adaptive-font, min)}px;
+            line-height: #{ map_deep_get($adaptive-font, min) * map_deep_get($adaptive-font, scale) }px;
+        }
+    }
+
+    @media (min-width: #{map_deep_get($adaptive-font, screen, min)}px) and (max-width: #{map_deep_get($adaptive-font, screen, max)}px)
+    {
+        %root
+        {
+            @include adaptive_font( map_deep_get($adaptive-font, min), map_deep_get($adaptive-font, max), map_deep_get($adaptive-font, scale) );
+        }
+    }
+
+    @media (min-width: #{map_deep_get($adaptive-font, screen, max)}px)
+    {
+        %root
+        {
+            font-size: #{map_deep_get($adaptive-font, max)}px;
+            line-height: #{map_deep_get($adaptive-font, max) * map_deep_get($adaptive-font, scale)}px;
+        }
+    }
+}
+
+@mixin em($font) {
+  font-size: em($font);
+}
+
+@mixin line-height($line) {
+    line-height: rem($line);
+}
+
+@mixin font( $name, $src, $hash ) {
+  @font-face {
+    font-family: $name;
+    src: url('fonts/' + $src + '.eot');
+    src: url('fonts/' + $src + '.eot?#iefix') format('embedded-opentype'),
+         url('fonts/' + $src + '.woff') format('woff'),
+         url('fonts/' + $src + '.ttf') format('truetype'),
+         url('fonts/' + $src + '.svg#' + $hash ) format('svg');
+    font-weight:normal;
+    font-style:normal;
+  }
+}

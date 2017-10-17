@@ -1,0 +1,52 @@
+%archive
+{
+    %posts
+    {
+        %posts__post
+        {
+            display: block;
+            @extend %wrap--break-md;
+            padding: 2rem;
+            @include transition(.3s background-color ease-out);
+
+        }
+
+        &--post
+        {
+            @extend %wrap--sm;
+            margin-top: 5rem;
+
+            %posts__post
+            {
+                &:visited, &:hover
+                {
+                    background-color: rgba( $shilo, 0.6 );
+                }
+            }
+
+        }
+
+        &--work
+        {
+            margin-top: 10rem;
+            %posts__post
+            {
+                @extend %grid-desktop--gutter-lg-bottom;
+            }
+            %heading--prefix
+            {
+                @include mobile()
+                {
+                    display: none;
+                };
+            }
+        }
+    }
+}
+
+.heading--prefix { @extend %heading--prefix; }
+.archive { @extend %archive; }
+.posts  { @extend %posts; }
+.posts--post { @extend %posts--post; }
+.posts--work { @extend %posts--work; }
+.posts__post { @extend %posts__post; }

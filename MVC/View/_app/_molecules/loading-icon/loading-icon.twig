@@ -1,0 +1,28 @@
+{# _molecules/loading-icon/loading-screen.twig #}
+
+{# Parameters #}
+{% set loadingIconAttrs = attrs ?? null %}
+{% set loadingIconBem = bem ?? null %}
+{% set LoadingScreenLogo = logo ?? null %}
+
+{# Variables #}
+{% set loadingIconBemDefault = [ { block: 'loading-screen' } ] %}
+{% set loadingIconBem = (loadingIconBem) ? bem|merge( loadingIconBemDefault ) : loadingIconBemDefault %}
+
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+{% set loadingInnerHTML %}
+   <div class="loading-screen__block">
+
+      <div class="loading-screen__object">
+         <!-- {{ mcro.createHTMLTag('h2', {}, [], 'LOADING') }} -->
+         {% include '_atoms/svg/svg.twig' with {  bem: [{ block: 'loading-screen', element: 'icon'}], icon: 'icon-logo' } %}
+
+      </div>
+
+   </div>
+{% endset %}
+
+{{ mcro.createHTMLTag( 'div', loadingIconAttrs, loadingIconBem, loadingInnerHTML ) }}

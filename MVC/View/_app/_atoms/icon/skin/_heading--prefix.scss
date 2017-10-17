@@ -1,0 +1,8 @@
+%symbol--heading-prefix
+{
+    width: 120px;
+    height: 120px;
+    fill: $shilo;
+}
+
+.symbol--heading-prefix {@extend %symbol--heading-prefix; }

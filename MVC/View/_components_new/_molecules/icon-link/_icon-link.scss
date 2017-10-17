@@ -1,0 +1,7 @@
+%symbol--icon-logo
+{
+    width: 75px;
+    height: 75px;
+}
+
+.symbol--icon-logo { @extend %symbol--icon-logo; }

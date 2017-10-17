@@ -1,0 +1,20 @@
+{% macro createHTMLTag( tagName, attributes, bem, innerHtml, selfClosing ) %}
+    {% set tmpAttributes = [] %}
+    {% if bem is defined %}
+      {% set class = bemify.bem(bem) %}
+    {% endif %}
+    {% if attributes is defined and attributes is iterable %}
+        {% for key, val in attributes %}
+            {% set tmpAttributes = tmpAttributes | merge(['%s="%s"' | format(key, val)]) %}
+        {% endfor %}
+    {% endif %}
+    <{{ tagName }} class="{{ class }}" {{ tmpAttributes | join(' ') | raw }}>
+    {% if innerHtml is defined and innerHtml | length > 0 %}
+        {{ innerHtml | raw }}
+    {% endif %}
+    {% if selfClosing is defined and selfClosing == true %}
+        />
+    {% else %}
+        </{{ tagName }}>
+    {% endif %}
+{% endmacro %}

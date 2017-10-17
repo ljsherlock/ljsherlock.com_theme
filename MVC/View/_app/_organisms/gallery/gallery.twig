@@ -1,0 +1,50 @@
+{# _ogranisms/photography/photography.twig #}
+
+{#
+   Photography
+   Show the first Item in Work Posts
+   @param {Array} instagram
+   {
+      image
+      caption
+   }
+#}
+
+{# Parameters #}
+{% set galleryArray = images ?? null %}
+{% set galleryBem = bem ?? null %}
+
+{# Variables #}
+{% set galleryBemDefault = [{ block: 'gallery'}] %}
+{% set galleryBem = ( galleryBem ) ? galleryBem|merge( galleryBemDefault ) : galleryBemDefault %}
+
+{% set galleryImageBem = [{ block: 'gallery', element: 'image' }] %}
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+   {% if galleryArray %}
+
+      {% set galleryInnerHTML %}
+
+         {% for item in galleryArray %}
+
+            {% if item.link %}
+               {% set galleryaInnerHTML %}
+                  {{ mcro.createHTMLTag('img', { src: item.src, alt: item.alt }, [ {block : 'gallery', element: 'img'} ], '', true) }}
+                  {{ mcro.createHTMLTag('span', {}, [{ block: 'gallery', element: 'date' }], item.created_date) }}
+               {% endset %}
+
+               {{ mcro.createHTMLTag('a', {href: item.link, target: '_blank'}, galleryImageBem, galleryaInnerHTML) }}
+            {% else %}
+               {{ mcro.createHTMLTag('div', {}, galleryImageBem, mcro.createHTMLTag('img', { src: item.src, alt: item.alt }, [ {block : 'gallery', element: 'img'} ], '', true) ) }}
+            {% endif %}
+
+
+         {% endfor %}
+
+      {% endset %}
+
+      {{ mcro.createHTMLTag('div', {}, galleryBem, galleryInnerHTML) }}
+
+   {% endif %}

@@ -1,0 +1,28 @@
+
+{% extends '_templates/global.twig' %}
+
+{% block main %}
+
+   {% include ['_app/_organisms/header/header.twig', '_components/_organisms/header/header.twig' ] %}
+
+   <main class="theme--{{colour}}" post_type="{{ post.post_type }}" page_id="{{ post.ID }}" parent_id="{{ function("wp_get_post_parent_id", post.id) }}">
+
+      <div class="wrap">
+         {% block app %}
+
+
+
+         {% endblock %}
+      </div>
+
+      {% block after_app %}
+
+
+
+      {% endblock %}
+
+   </main>
+
+   {% include ['_app/_organisms/footer/footer.twig', '_organisms/footer/footer.twig'] %}
+
+{% endblock %}

@@ -1,0 +1,6 @@
+%post
+{
+    @extend %wrap--sm;
+}
+
+%post { @extend %post; }

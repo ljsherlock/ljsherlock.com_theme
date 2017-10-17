@@ -1,0 +1,11 @@
+%icon
+{
+    &--sm
+    {
+        height:40px;
+        width: 40px;
+    }
+}
+
+.icon { @extend %icon; }
+.icon--sm { @extend %icon--sm; }

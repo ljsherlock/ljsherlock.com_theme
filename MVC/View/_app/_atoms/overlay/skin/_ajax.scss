@@ -1,0 +1,49 @@
+// _atoms/overlay/skin/_loading.scss
+
+/*------------------------------------------*\
+*   B E M
+/*------------------------------------------*/
+
+%overlay
+{
+    &%overlay--ajax
+    {
+        background: white;
+        z-index: -1020;
+        opacity: 0;
+        // @include desktop()
+        // {
+        //     margin: 150px 40px 0;
+        // };
+        // @include portable()
+        // {
+        //     margin: 150px 15px 0;
+        // };
+        &%overlay--fade
+        {
+            @include animation( .5s ease ajax-fade-in forwards );
+        }
+    }
+}
+
+
+// ajax overlay
+@include keyframes (ajax-fade-in)
+{
+   0%
+   {
+      opacity: 0;
+      z-index: -1000;
+   }
+   100%
+   {
+       z-index: 1020;
+       opacity: 1;
+   }
+};
+
+.overlay { @extend %overlay; }
+.overlay--ajax { @extend %overlay--ajax; }
+.overlay--fade { @extend %overlay--fade; }
+.overlay--animation-hide { @extend %overlay--animation-hide; }
+.overlay--animation-show { @extend %overlay--animation-show; }

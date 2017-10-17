@@ -1,0 +1,5 @@
+<div class="terms">
+   {% for term in terms %}
+       {% include '_molecules/btn/btn.twig' with { attrs : { href: term.path  }, bem : [{block: 'term'}], text: { value: term.name } } %}
+   {% endfor %}
+</div>

@@ -1,0 +1,21 @@
+// _atoms/overlay/_overlay.scss
+
+/*------------------------------------------*\
+*   B E M
+/*------------------------------------------*/
+
+%overlay
+{
+    &--animation-active
+    {
+        z-index: 1000;
+    }
+    &--animation-inactive
+    {
+        z-index: -1000;
+    }
+}
+
+// .overlay { @extend %overlay; }
+.overlay--animation-active { @extend %overlay--animation-active; }
+.overlay--animation-inactive { @extend %overlay--animation-inactive; }

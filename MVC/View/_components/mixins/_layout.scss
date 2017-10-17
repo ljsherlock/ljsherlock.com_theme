@@ -1,0 +1,51 @@
+// Padding longhand version
+@mixin padding-all($top: null, $right: null, $bottom: null, $left: null, $remain: null, $units: 'px')
+{
+  @if $top != null { padding-top: #{$top}#{$units} } @else if $remain != null { padding-top: #{$remain}#{$units} }
+  @if $right != null { padding-right: #{$right}#{$units} } @else if $remain != null { padding-right: #{$remain}#{$units} }
+  @if $bottom != null { padding-bottom: #{$bottom}#{$units} } @else if $remain != null { padding-bottom: #{$remain}#{$units} }
+  @if $left != null { padding-left: #{$left}#{$units} } @else if $remain != null { padding-left: #{$remain}#{$units} }
+}
+
+
+@mixin vertical-gradient($alpha, $start : $pohutukawa, $stop: $utahCrimson) {
+    background-color: ($start + $stop) / 2;
+    background: -moz-linear-gradient(left,  rgba($start, $alpha) 0%, rgba($stop, $alpha) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba($start, $alpha) 0%,rgba($stop, $alpha) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba($start, $alpha) 0%,rgba($stop, $alpha) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$start}', endColorstr='#{$stop}',GradientType=1 ); /* IE6-9 */
+}
+
+// POSITIONAL PSEUDO
+
+@mixin positional-pseudo($pseudo:'before', $top:initial, $right:initial, $bottom:initial, $left:initial) {
+  &:#{$pseudo} {
+      top:$top;
+      right:$right;
+      bottom: $bottom;
+      left: $left;
+      position: absolute;
+      content: "";
+      @content;
+  }
+}
+
+@mixin absolute($top:0, $right:0, $bottom:0, $left:0, $w: 100%, $h: 100%) {
+  top:$top;
+  right:$right;
+  bottom: $bottom;
+  left: $left;
+  width: $w;
+  height: $h;
+  @content;
+}
+
+@mixin wrap-size( $device ) {
+    $size: map_deep_get( $layout, wrap, $device, width );
+
+    @if $size == 100%  {
+        width: $size;
+    } @else {
+        width: #{ $size / $gh }em;
+    }
+};

@@ -1,0 +1,74 @@
+{#
+ * @usedby global.twig
+ * @requires constants, mustard, icons
+#}
+
+<!DOCTYPE html>
+<html class="restrict">
+    <head>
+        {% block head %}
+
+           <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" href="{{ constant('LJS_FAV') }}/favicon.ico">
+
+           <!-- Mobile (Android, iOS & others) -->
+           <link rel="apple-touch-icon" sizes="57x57" href="{{ constant('LJS_FAV') }}/apple-touch-57x57.png">
+           <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{ constant('LJS_FAV') }}/apple-touch-57x57.png">
+           <link rel="apple-touch-icon" sizes="72x72" href="{{ constant('LJS_FAV') }}/apple-touch-72x72.png">
+           <link rel="apple-touch-icon" sizes="114x114" href="{{ constant('LJS_FAV') }}/apple-touch-114x114.png">
+           <link rel="apple-touch-icon" sizes="120x120" href="{{ constant('LJS_FAV') }}/apple-touch-120x120.png">
+           <link rel="apple-touch-icon" sizes="144x144" href="{{ constant('LJS_FAV') }}/apple-touch-144x144.png">
+           <link rel="apple-touch-icon" sizes="152x152" href="{{ constant('LJS_FAV') }}/apple-touch-152x152.png">
+           <link rel="icon" type="image/png" href="{{ constant('LJS_FAV') }}/favicon-32x32.png" sizes="32x32" />
+           <link rel="icon" type="image/png" href="{{ constant('LJS_FAV') }}/favicon-16x16.png" sizes="16x16" />
+
+           <!-- Windows 8 Tiles -->
+           <meta name="application-name" content="{{ website_title }}">
+           <meta name="msapplication-TileImage" content="{{ constant('LJS_FAV') }}/mstile-144x144.png">
+           <meta name="msapplication-TileColor" content="#2A2A2A">
+
+           <!-- iOS Settings -->
+           <meta content="yes" name="apple-mobile-web-app-capable">
+           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+            <meta charset="{{ function( 'bloginfo', 'charset' ) }}"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            {{ wp_head }}
+
+        {% endblock %}
+    </head>
+      <!--[if lt IE 7]>      <body class="ie6">    <![endif]-->
+      <!--[if IE 7]>         <body class="ie7">    <![endif]-->
+      <!--[if IE 8]>         <body class="ie8">    <![endif]-->
+      <!--[if IE 9]>         <body class="ie9">    <![endif]-->
+      <!--[if gt IE 9]>      <body class="ie10+">  <![endif]-->
+      <!--[if !IE]><!-->     <body>                <!--<![endif]-->
+
+         {% if mustard != true and icons != '' %}
+            {{ icons }}
+         {% endif %}
+
+         {% block body %}
+
+         {% endblock %}
+
+         <script>
+         var ajax_url = "{{ constant('LJS_AJAXURL') }}";
+
+         var require = {
+             baseUrl: "{{ constant('LJS_VIEW') ~ '/Assets/Scripts'}}",
+             paths: {
+                 Polyfills: 'Lib/polyfills',
+                 Util: 'Utils/util',
+                 Mustard: 'Lib/mustard',
+                 Core: 'Core',
+                 App: 'App',
+                 Config: 'Lib/appConfig',
+             }
+         };
+         </script>
+         <script src="{{ constant('LJS_VIEW') ~ '/Assets/Scripts/Lib/require.js'}}" data-main="Main"></script>
+
+
+     </body>
+</html>

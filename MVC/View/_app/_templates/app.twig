@@ -1,0 +1,69 @@
+{# _templates/app.twig #}
+
+{#
+   Single Post Page
+   @param {Post Object} post
+#}
+
+{# Parameters #}
+{% set appPost = post ?? null %}
+{% set appFooter = footer ?? null %}
+{% set appHeader = header ?? null %}
+
+{# Variables #}
+{% set appAttrs = { post_type: appPost.post_type, post_id: appPost.ID, parent_id: function("wp_get_post_parent_id", appPost.id) } %}
+
+{# Output #}
+{% extends '_templates/global.twig' %}
+
+{% block main %}
+
+   {% if appPost %}
+
+      {% import 'macros.twig' as mcro %}
+
+      {% if request_body.ajax != 1 %}
+         {% include '_atoms/overlay/overlay.twig' with { attrs: { id: 'overlayLoading' }, bem: [{block: 'overlay', modifier: ['splash'] } ] } %}
+         {% include '_molecules/loading-icon/loading-icon.twig' with { attrs: { id: 'loadingScreen' }, bem: [{ block: 'loading-screen', modifier: ['splash'] }] } %}
+
+         {% include '_atoms/overlay/overlay.twig' with { attrs: { id: 'overlayAjax' }, bem: [{block: 'overlay', modifier: ['ajax'] } ] } %}
+         {% include '_molecules/loading-icon/loading-icon.twig' with { attrs: { id: 'ajaxScreen' }, bem: [{ block: 'loading-screen', modifier: ['ajax'] }] } %}
+
+         {% include '_atoms/overlay/overlay.twig' with { attrs: { id: 'overlayMenu' }, bem: [{block: 'overlay', modifier: ['menu'] } ] } %}
+
+         {% include ['_app/_organisms/header/header.twig', '_components/_organisms/header/header.twig' ] with { menu: appHeader.menu } %}
+      {% endif %}
+
+      {% set appInnerHTML %}
+
+         <div class="wrap">
+            {% block app %}{% endblock %}
+         </div>
+
+         {% block after_app %}{% endblock %}
+
+      {% endset %}
+
+      {% if request_body.ajax == 1 %}
+
+         {{ appInnerHTML }}
+
+      {% else %}
+
+         {{ mcro.createHTMLTag('main', {
+            post_type: post.post_type,
+            page_id: post.ID,
+            parent_id: function("wp_get_post_parent_id", post.id )
+         }, [], appInnerHTML) }}
+
+      {% endif %}
+
+      {% if appFooter and request_body.ajax != 1 %}
+
+         {% include ['_app/_organisms/footer/footer.twig', '_organisms/footer/footer.twig'] %}
+
+      {% endif %}
+
+   {% endif %}
+
+{% endblock %}

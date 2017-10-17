@@ -1,0 +1,33 @@
+%heading--prefix
+{
+    @extend %grid--gutter-md-right;
+    @extend %flex--align-items-center;
+    @extend %grid;
+    width: 100%;
+    @include portable() {
+        text-align: center;
+    }
+    %prefix__icon
+    {
+        flex-shrink: 0;
+        @include portable() {
+            display: none;
+        };
+    }
+
+}
+
+%prefix--line
+{
+    @include desktop()
+    {
+        flex-shrink: 0;
+        width: 20%;
+        height: 2px;
+        background-color: $shilo;
+    };
+}
+
+.heading--prefix  { @extend %heading--prefix;}
+.prefix--line { @extend %prefix--line; }
+.prefix__icon { @extend %prefix__icon; }

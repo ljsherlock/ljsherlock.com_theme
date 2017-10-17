@@ -1,0 +1,89 @@
+
+%browser-mockup
+{
+    position: relative;
+    @include desktop()
+    {
+        border: 0.5em solid rgba(230,230,230,1);
+        border-radius: 3px 3px 0 0;
+        border-top: 0.5em solid rgba(230,230,230,1);
+        padding: 2em;
+        margin-top: 2.5em;
+    };
+    @include tablet()
+    {
+        border: 0.5em solid rgba(230,230,230,1);
+        border-radius: 3px 3px 0 0;
+        border-top: 0.5em solid rgba(230,230,230,1);
+        padding: 2em;
+        margin-top: 2.5em;
+    };
+
+    @include desktop() {
+        &:before
+        {
+            display: block;
+            position: absolute;
+            content: '';
+            top: -2.25em;
+            left: 1em;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background-color: #f44;
+            box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
+        }
+        &--tab
+        {
+            &:after {
+              display: block;
+              position: absolute;
+              content: '';
+              top: -3em;
+              left: 10.5em;
+              width: 15%;
+              height: 0em;
+              border-bottom: 3em solid rgba(230,230,230, 1);
+              border-left: 0.8em solid transparent;
+              border-right: 0.8em solid transparent;
+            }
+        }
+    };
+    @include tablet() {
+        &:before
+        {
+            display: block;
+            position: absolute;
+            content: '';
+            top: -2.25em;
+            left: 1em;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            background-color: #f44;
+            box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
+        }
+        &--tab
+        {
+            &:after {
+              display: block;
+              position: absolute;
+              content: '';
+              top: -3em;
+              left: 10.5em;
+              width: 15%;
+              height: 0em;
+              border-bottom: 3em solid rgba(230,230,230, 1);
+              border-left: 0.8em solid transparent;
+              border-right: 0.8em solid transparent;
+            }
+        }
+    };
+    > * {
+        display: block;
+        width: 100%;
+    }
+}
+
+.browser-mockup { @extend %browser-mockup; }
+.browser-mockup--tab { @extend %browser-mockup--tab; }

@@ -1,0 +1,42 @@
+{# _molecules/browser-mockup/browser-mockup.twig #}
+
+{#
+   Page Header
+   From the menu object create a menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {String} image
+#}
+
+{# Parameters #}
+{% set browserImageBem = bem ?? null %}
+{% set browserImageAttrs = attrs ?? null %}
+{% set browserImageSrc = image ?? null %}
+
+{# Variables #}
+{% set browserImageBemDefault = [{ block: 'browser-mockup', modifier: ['tab']}] %}
+{# Merge default and passed bem Array #}
+{% set browserImageBem = (browserImageBem) ? browserImageBem|merge(browserImageBemDefault) : browserImageBemDefault  %}
+
+{# Output #}
+{% if browserImageSrc %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set browserImageHTML %}
+
+      {{ mcro.createHTMLTag('img', { src: browserImageSrc }, [{ block:'browser-mockup', element: 'image'}], null, true ) }}
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag('div', browserImageAttrs, browserImageBem, browserImageHTML) }}
+
+{% endif %}

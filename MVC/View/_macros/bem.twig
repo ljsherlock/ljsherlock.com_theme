@@ -1,0 +1,13 @@
+{% macro bem(bem) %}
+{% set classname = '' %}
+{% for item in bem %}
+{# set create the block and element #}
+{% set block__element = (item.block ? item.block ~ ( item.element ? '__' ~ item.element : '' ) : '') %}
+{# if is block, modifier needs print as new string. IE block__element block__element--modifier #}
+{# add to output variable #}
+{% set classname = classname ~ ' ' ~ block__element %}
+{# if there are modifiers add the after the base block/modifier IE block__element block__element--modifier #}
+{% if item.modifier %}
+{% for modifier in item.modifier %}
+{% set classname = classname ~ (' ' ~ block__element ~ '--' ~ modifier) %}
+{% endfor %}{% endif %}{% endfor %}{{classname}}{% endmacro %}

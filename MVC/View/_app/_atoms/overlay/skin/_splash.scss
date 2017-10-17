@@ -1,0 +1,46 @@
+// _atoms/overlay/skin/_loading.scss
+
+/*------------------------------------------*\
+*   B E M
+/*------------------------------------------*/
+
+%overlay
+{
+    &%overlay--splash
+    {
+        background: white;
+        z-index: 1020;
+        &%overlay--animation-hide
+        {
+            @include animation( .5s ease .5s loading-fade-in forwards );
+            animation-direction: reverse;
+        }
+        &%overlay--animation-show
+        {
+            @include animation( .5s ease loading-fade-in forwards);
+            animation-direction: normal;
+        }
+    }
+
+}
+
+
+// loading overlay
+@include keyframes (loading-fade-in)
+{
+   0%
+   {
+      opacity: 0;
+      z-index: -1000;
+   }
+   100%
+   {
+       z-index: 1020;
+       opacity: 1;
+   }
+};
+
+.overlay { @extend %overlay; }
+.overlay--splash { @extend %overlay--splash; }
+.overlay--animation-hide { @extend %overlay--animation-hide; }
+.overlay--animation-show { @extend %overlay--animation-show; }

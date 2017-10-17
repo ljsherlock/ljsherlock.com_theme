@@ -1,0 +1,20 @@
+{# atoms/forms/select-menu.twig #}
+
+<select name="{{ select_name }}" title="{{ select_title }}" id="{{ select_name }}">
+
+   {% if select_default %}
+      <option selected="selected" disabled="disabled" value="0"> {{ select_default }} </option>
+   {% endif %}
+
+   {% for item in options %}
+      {% if val_attr and title_attr %}
+         {% set value = attribute(item, val_attr) %}
+         {% set title = attribute(item, title_attr) %}
+      {% else %}
+         {% set value = item.option %}
+         {% set title = item.option %}
+      {% endif %}
+      <option value="{{value}}">{{title}}</option>
+   {% endfor %}
+
+</select>

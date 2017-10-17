@@ -1,0 +1,1 @@
+define(["Util"],function(i){var n={retinaDevice:!1,init:function(){}};return n});

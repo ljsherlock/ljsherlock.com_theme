@@ -1,0 +1,50 @@
+%prev-next-post
+{
+    @extend %grid-desktop;
+    @extend %grid-desktop--row;
+    @extend %grid-tablet;
+    @extend %grid-tablet--gutter-sm-bottom;
+    @extend %grid-tablet--col;
+    @extend %grid-mobile;
+    @extend %grid-mobile--col;
+    @extend %grid-mobile--gutter-sm-bottom;
+    @extend %flex--just-space-between;
+    @extend %flex--align-items-center;
+    %prev-next-post__link
+    {
+        @extend %grid-desktop__50-of-100;
+        @extend %grid-tablet__100-of-100;
+        @extend %grid-mobile__100-of-100;
+        @extend %btn--menu;
+        letter-spacing: 0.07em;
+        @extend %line-below--outwards;
+        text-align: center;
+        %prev-next-post__prefix:first-child
+        {
+            color: $shilo;
+        }
+        &:after
+        {
+            bottom: -1rem;
+            background-color: $shilo;
+        }
+        &--prev
+        {
+            @include desktop(){
+                text-align: left;
+            };
+        }
+        &--next
+        {
+            @include desktop(){
+                text-align: right;
+            };
+        }
+    }
+}
+
+.prev-next-post { @extend %prev-next-post};
+.prev-next-post__link { @extend %prev-next-post__link};
+.prev-next-post__link--prev { @extend %prev-next-post__link--prev !optional };
+.prev-next-post__link--next  { @extend %prev-next-post__link--next !optional };
+.btn__text { @extend %prev-next-post__prefix; }

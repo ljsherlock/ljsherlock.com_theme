@@ -1,0 +1,25 @@
+{% extends '_templates/app.twig' %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% block app %}
+
+      <div class="wrap post">
+
+         <div class="wrap--md  typography">
+            {{ mcro.createHTMLTag('h1', {}, [],  post.title) }}
+
+            {{ mcro.createHTMLTag('h2', {}, [{block: 'h3'}],  subtitle) }}
+         </div>
+
+         <div class="wrap--sm  typography">
+            {{ post.content }}
+            {% include '_organisms/terms/listTerms.twig' with { terms: post.terms, postObj: postObj, taxObj: taxObj } %}
+         </div>
+      </div>
+
+   {% endblock %}
+
+   {% block after_app %}
+
+   {% endblock %}

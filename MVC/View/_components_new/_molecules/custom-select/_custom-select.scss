@@ -1,0 +1,75 @@
+/*---------------------------------------------*\
+*    CUSTOM SELECT
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+    %select-js
+    {
+        @extend %drop-down;
+        position: relative;
+        %select-js__button
+        {
+            @extend %drop-down__button;
+        }
+        %select-js__list
+        {
+            @extend %drop-down__list;
+            @extend %flex;
+            @extend %flex--col;
+            overflow-y: scroll;
+            width: 100%;
+
+            /*---------------------------------------------*\
+            *   give the list a large max-height to transition
+            *   with a dynamic height value.
+            /*---------------------------------------------*/
+            @for $i from 0 through 25
+            {
+                &.select-js__list--#{$i}
+                {
+                    // Math!
+                    // --25 will be z-index: 400
+                    z-index: #{100 / ($i + 1) };
+                }
+            }
+
+            %select-js__item
+            {
+                @extend %drop-down__item;
+                margin: 0;
+            }
+
+            &--hidden { display: none; }
+        }
+
+        %select-js__event
+        {
+            // @extend %events-overlay;
+        }
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+
+    .select-js { @extend %select-js; }
+
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+
+    .select-js__list { @extend %select-js__list; }
+    .select-js__button { @extend %select-js__button; }
+    .select-js__item { @extend %select-js__item; }
+    // .button__text { @extend %button__text; }
+
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/
+
+    // .btn--active { @extend %btn--active; }
+    // .btn--inactive { @extend %btn--inactive; }
+    // .select-js__item--selected { @extend %select-js__item--selected; }
+    .select-js__list--hidden { @extend %select-js__list--hidden; }

@@ -1,0 +1,234 @@
+/*---------------------------------------------*\
+ *  BASE
+ *
+ *  1. Section Breaks
+ *  2. Layout
+ *  3. Media
+ *  4. Grid
+ *  5. Typography
+ *  6. Colours
+ *  7. Components
+ *
+/*---------------------------------------------*/
+
+@import "functions/functions";
+@import "../../node_modules/plumber-sass/plumber";
+
+/*---------------------------------------------*\
+ *    1. Media
+/*---------------------------------------------*/
+
+    $media: (
+        mobile: 0,
+        tablet: 768,
+        desktop: 1024,
+    );
+
+/*---------------------------------------------*\
+ *    2. Layout
+/*---------------------------------------------*/
+
+    $layout : (
+        padding: 25px,
+        wrap : (
+            padding: 15,
+            mobile: (
+                width: 100%,
+                squash: (
+                    sm: 0
+                )
+            ),
+            tablet: (
+                width: 100%,
+                squash: (
+                    sm: 225,
+                    md: 175,
+                    rg: 125
+                )
+            ),
+            desktop: (
+                width: 1400,
+                squash: (
+                    sm: 400,
+                    md: 225,
+                    rg: 175
+                )
+            ),
+            squash : (
+                value: 50,
+            )
+        ),
+    );
+
+/*---------------------------------------------*\
+ *    3. Section Breaks
+/*---------------------------------------------*/
+
+    $wrap : (
+        mobile: 0.5,
+        tablet: 0.75,
+        padding: (
+            xs: 15,
+            sm: 25,
+            md: 30,
+            lg: 40,
+            xlg: 50,
+        ),
+    );
+
+    $wrap-padding--xs: 15;
+    $wrap-padding--sm: 25;
+    $wrap-padding--md: 30;
+    $wrap-padding--lg: 40;
+    $wrap-padding--xlg: 50;
+
+    // device multipliers
+    $wrap-mobile-multiplier: 0.50;
+    $wrap-tablet-multiplier: 0.75;
+
+/*---------------------------------------------*\
+ *    4. Grid
+/*---------------------------------------------*/
+
+    $grid : (
+        gutter : (
+            xs : 5,
+            sm : 15,
+            md : 20,
+            lg : 25,
+            xlg : 50
+        )
+    );
+
+/*---------------------------------------------*\
+ *    5. Colours
+/*---------------------------------------------*/
+
+    $grey: grey;
+    $black: black;
+    $white: white;
+    $lagunaSecaBlue: #2E9BDA;
+
+    $link-color: $lagunaSecaBlue;
+    $link-visited-color: darken($link-color, 25%);
+    $link-hover-color: lighten($link-color, 10%);
+
+    $base-color: $black;
+
+
+/*---------------------------------------------*\
+ *    6. Typography
+/*---------------------------------------------*/
+
+    $type : (
+        scale: 1.333,
+        base: 1,
+        root: 8,
+        margins: (
+            heading: 1em 0 0.5em,
+            content: 1em 0,
+        )
+    );
+
+    $adaptive-font : (
+        scale: 1.4,
+        min: 6,
+        max: 8,
+        screen: (
+            min: 360,
+            max: map_get($media, tablet),
+        ),
+    );
+
+    // Plumber Defaults
+    @include plumber-set-defaults
+    (
+        $grid-height: 1rem,
+        $baseline: 0.158203,
+        $font-size: 1.75,
+        $line-height: 3,
+        $leading-top: 1,
+        $leading-bottom: 2
+    );
+
+
+    /*---------------------------------------------*\
+     *   SASS Modular Scale
+     *   https://github.com/modularscale/modularscale-sass
+    /*---------------------------------------------*/
+    $modularscale: (
+      base: 1em,
+      ratio: 1.3
+    );
+
+    $fonts : (
+        serif: (
+            family: "serif"
+        ),
+        sans-serif: (
+            family: "sans-serif",
+        ),
+        fixed: (
+            family: '"Lucida Console", Monaco, monospace'
+        )
+    );
+
+    $type_size : (
+        scale: '1.333',
+        base: 0.9375,
+        size: (
+            base: 16,
+        )
+    );
+
+
+/*---------------------------------------------*\
+ *    7. Components
+/*---------------------------------------------*/
+    /*---------------------------------------------*\
+     *    1. Buttons
+    /*---------------------------------------------*/
+
+        $btn: (
+            icon: (
+                dimensions: (
+                    width: 16px,
+                    height: 16px
+                ),
+                color: $lagunaSecaBlue,
+            ),
+            font-size: 13px,
+            line-height: 15px,
+            padding: (
+                side: 20px,
+            )
+        );
+    /*---------------------------------------------*\
+     *    2. Blocks
+    /*---------------------------------------------*/
+
+        $block: (
+            padding: (
+                xs: 10px,
+                sm: 15px,
+                md: 20px,
+                lg: 25px
+            ),
+            font-size: 13px,
+            line-height: 15px
+        );
+
+    /*---------------------------------------------*\
+     *    3. Icons
+    /*---------------------------------------------*/
+
+        $icon: (
+            sm: 5,
+            md: 10,
+            lg: 15
+        );
+
+/*---------------------------------------------*\
+ *   Includes
+/*---------------------------------------------*/
+    @import "mixins/all";

@@ -1,0 +1,72 @@
+/*---------------------------------------------*\
+*    DROPDOWN 
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+
+    %drop-down {
+        %drop-down__button {
+            z-index: 2;
+            position:relative;
+        }
+        %drop-down__button__has--children {
+            @extend %drop-down__button;
+        }
+        %drop-down__list {
+            max-height: 0;
+            position: absolute;
+            overflow-x: hidden;
+            overflow-y: hidden;
+            z-index: 2;
+            @include transition(.5s max-height ease);
+            overflow:hidden;
+        }
+        %drop-down__item {
+            // disable selection
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
+            @include padding-all(null, 10, null, 10);
+            // &:first-child {
+            //     @include padding-all(10, null, null, null);
+            // }
+            &:last-child {
+                @include padding-all(null, null, 10, null);
+            }
+        }
+        %drop-down__check {
+            display: none;
+        }
+        %drop-down__label {
+
+        }
+
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+
+    .drop-down { @extend %drop-down; }
+
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+
+    .drop-down__check { @extend %drop-down__check; }
+
+    .drop-down__button { @extend %drop-down__button; }
+
+    .drop-down__item { @extend %drop-down__item; }
+
+    .drop-down__list { @extend %drop-down__list; }
+
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/
+
+    .drop-down__button__has--children { @extend %drop-down__button__has--children; }

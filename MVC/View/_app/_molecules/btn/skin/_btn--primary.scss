@@ -1,0 +1,19 @@
+%btn--primary
+{
+    @extend %btn--menu;
+    font-size: 2.5rem;
+    background-color: $shilo;
+    padding: 2rem 3rem;
+    &:hover
+    {
+        background-color: lighten( $shilo, 10% );
+
+    }
+    %btn__text
+    {
+        color: white;
+    }
+}
+
+.btn--primary { @extend %btn--primary; }
+.btn__text { @extend %btn__text; }

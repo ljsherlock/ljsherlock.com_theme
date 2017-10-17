@@ -1,0 +1,55 @@
+{# _molecules/prev-next-post/prev-next-post.twig #}
+
+{#
+   Previous and Next Post
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Array} prev
+   @param {Array} next
+#}
+
+{# Parameters #}
+{% set prevNextPrevious = prev ?? null %}
+{% set prevNextNext = next ?? null %}
+{% set prevNextBem = bem ?? null %}
+{% set prevNextAttrs = attrs ?? null %}
+
+{# Varables #}
+{% set prevNextBemDefault = [{ block: 'prev-next-post' }] %}
+{% set prevNextBem = (prevNextBem) ? prevNextBem|merge(prevNextBemDefault) : prevNextBemDefault %}
+
+{# Output #}
+
+{% import 'macros.twig' as mcro %}
+
+{% set prevNextInnerHTML %}
+
+   {% if prevNextPrevious.link != null %}
+
+      {% include '_molecules/btn/btn.twig' with {
+      attrs: { href: prevNextPrevious.link },
+      bem: [{ block: 'prev-next-post', element: 'link', modifier: ['prev'] }],
+      texts: [{ value: 'Previous ' ~ post.post_type }, { value: prevNextPrevious.title }] } %}
+
+   {% endif %}
+
+   {% if prevNextNext.link != null %}
+
+      {% include '_molecules/btn/btn.twig' with {
+      attrs: { href: prevNextNext.link },
+      bem: [{ block: 'prev-next-post', element: 'link', modifier: ['next'] }],
+      texts: [{ value: 'Next ' ~ post.post_type }, { value: prevNextNext.title }] } %}
+
+   {% endif %}
+
+{% endset %}
+
+{{ mcro.createHTMLTag('div', prevNextAttrs, prevNextBem, prevNextInnerHTML) }}

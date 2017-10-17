@@ -1,0 +1,43 @@
+{# _ogranisms/photography/photography.twig #}
+
+{#
+   DIsplay a colour using a passed hex code.
+   @param {Array} colours
+   {
+      hex {String} Hex code
+      name {String Colour Name
+   }
+#}
+
+{# Parameters #}
+{% set coloursAttrs = attrs ?? null %}
+{% set coloursBem = bem ?? null %}
+{% set coloursArray = colours ?? null %}
+
+{# Variables #}
+{% set coloursBemDefault = [{ block: 'colours'}, {block: 'grid'}] %}
+{% set coloursBem = (coloursBem) ? coloursBem|merge(coloursBemDefault) : coloursBemDefault %}
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+   {% if coloursArray %}
+
+      {% set coloursHTML %}
+
+         {% for colour in coloursArray %}
+
+            <div class="colour">
+
+               {{ mcro.createHTMLTag('div', { style: 'background-color:' ~ colour.hex }, [ { block:'colour', element: 'fill' } ] ) }}
+               {{ mcro.createHTMLTag('span', {}, [ {block: 'colour', element: 'name'} ], colour.name ) }}
+
+            </div>
+
+         {% endfor %}
+
+      {% endset %}
+
+      {{ mcro.createHTMLTag( 'div', coloursAttrs, coloursBem, coloursHTML ) }}
+
+   {% endif %}

@@ -1,0 +1,38 @@
+{% extends '_app/_templates/app.twig' %}
+
+   {% block app %}
+
+      {% import 'macros.twig' as mcro %}
+
+      <section class="intro wrap--break-xlg">
+         {% include '_organisms/intro/intro.twig' %}
+      </section>
+
+      <section class="newest-project wrap--break-xlg">
+         <div class="wrap--md">
+            {% include '_molecules/heading--prefix/heading--prefix.twig' with {
+               icon: 'heading-prefix',
+               title: 'Newest Project',
+               bem: [{block: 'wrap', modifier:['break-md']}]
+            } %}
+         </div>
+
+         {% include '_organisms/newest-project/newest-project.twig' %}
+
+      </section>
+
+      <section class="photography wrap--break-lg">
+         <div class="wrap--md">
+            {% include '_molecules/heading--prefix/heading--prefix.twig' with {
+               icon: 'heading-prefix',
+               title: 'Photography',
+               bem: [ {block: 'wrap', modifier:['break-md']} ]
+            } %}
+         </div>
+
+
+         {% include '_organisms/gallery/gallery.twig' with { images: instagram, bem: [ { block: 'gallery', modifier: ['instagram'] } ] } %}
+
+      </section>
+
+   {% endblock %}

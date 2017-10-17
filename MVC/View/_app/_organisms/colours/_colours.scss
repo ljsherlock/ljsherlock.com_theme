@@ -1,0 +1,37 @@
+%colours
+{
+    @extend %grid-desktop;
+    @extend %grid-tablet;
+    @extend %grid-mobile;
+    @extend %grid-desktop--gutter-sm-right;
+    @extend %grid-tablet--gutter-sm-right;
+    @extend %grid-mobile--gutter-sm-bottom;
+    @extend %grid-desktop--continuous;
+    @extend %grid-tablet--continuous;
+    @extend %grid-mobile--continuous;
+    %colour
+    {
+        @extend %grid-desktop__20-of-100;
+        @extend %grid-tablet__25-of-100;
+        @extend %grid-mobile__100-of-100;
+
+        @extend %grid;
+        @extend %grid--col;
+        @extend %flex--center;
+
+        %colour__fill
+        {
+            width: 100%;
+            height: 40px;
+        }
+        %colour__hex
+        {
+            @extend %grid;
+        }
+    }
+}
+
+.colours { @extend %colours; }
+.colour { @extend %colour; }
+.colour__fill { @extend %colour__fill; }
+.colours__hex { @extend %colour__hex; }

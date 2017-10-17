@@ -1,0 +1,17 @@
+%newest-project
+{
+    %newest-project__body
+    {
+        @extend %wrap--break-md;
+    }
+    %newest-project__footer
+    {
+        @extend %wrap--sm;
+        @extend %flex;
+        @extend %flex--center;
+    }
+}
+
+.newest-project { @extend %newest-project };
+.newest-project__body { @extend %newest-project__body };
+.newest-project__footer { @extend %newest-project__footer };

@@ -1,0 +1,43 @@
+{# _components/_organisms/header/header.twig #}
+
+{#
+   Menu
+   From the menu object create a menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Timber Menu Object}
+#}
+
+{# Parameters #}
+{% set headerAttrs = attrs ?? null %}
+{% set headerBem = bem ?? null %}
+{% set menuItems = menu.items ?? null %}
+
+{# Variables #}
+{% set headerBem = [{ block: 'header' }] %}
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+{% set innerHTML %}
+
+   <div class="header__grid">
+      {% include '_molecules/icon-link/icon-link.twig' with { icon: 'icon-logo', attrs: { href: constant('LJS_URL') }, bem : [{block: 'logo'}] } %}
+      {% include '_atoms/hamburger/hamburger.twig' %}
+      {% include ['_app/_organisms/menu/menu.twig', '_components/_organisms/menu/menu.twig' ] with {
+         menu: menuItems,
+         bem: [{block: 'nav', modifier: ['primary'] } ]
+      } %}
+   </div>
+
+{% endset %}
+
+{{ mcro.createHTMLTag('header', {}, headerBem, innerHTML) }}

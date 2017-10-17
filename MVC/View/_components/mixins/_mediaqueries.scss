@@ -1,0 +1,45 @@
+
+// Media in asending order.
+// portable = tablet + mobile
+// mobile
+// tablet
+// desktop
+// wrapper = wrap + desktop
+
+@mixin mobile {
+    @media (max-width: #{ ( map_deep_get($media, tablet) - 1) / 16 }em) {
+      @content;
+    }
+}
+
+@mixin tablet {
+  @media (min-width: #{ map_deep_get($media, tablet) / 16}em)
+  and (max-width: #{( map_deep_get($media, desktop) - 1)  / 16}em) {
+    @content;
+  }
+}
+
+@mixin portable {
+  @media (max-width: #{ (map_deep_get($media, desktop) - 1) / 16 }em) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{ map_deep_get($media, desktop) / 16}em) {
+    @content;
+  }
+}
+
+@mixin wrapper {
+  @media (min-width: #{ map_deep_get($media, desktop) / 16}em)
+  and (max-width: #{( map_deep_get($layout, wrap, desktop, width) - 1) / 16}em) {
+    @content;
+  }
+}
+
+@mixin infinite {
+  @media ( min-width: #{( map_deep_get($layout, wrap, desktop, width) - 1) / 16}em ) {
+    @content;
+  }
+}

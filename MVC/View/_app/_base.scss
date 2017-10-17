@@ -1,0 +1,164 @@
+/*---------------------------------------------*\
+ *  BASE
+ *
+ *  1. Section Breaks
+ *  2. Layout
+ *  3. Media
+ *  4. Grid
+ *  5. Typography
+ *  6. Colours
+ *  7. Components
+ *
+/*---------------------------------------------*/
+
+    @import "functions/functions";
+
+/*---------------------------------------------*\
+ *    1. Media
+/*---------------------------------------------*/
+
+    // $media
+
+/*---------------------------------------------*\
+ *    2. Layout
+/*---------------------------------------------*/
+
+$layout : (
+    padding: 25px,
+    wrap : (
+        padding: 15,
+        mobile: (
+            width: 100%,
+            squash: (
+                sm: 0
+            )
+        ),
+        tablet: (
+            width: 100%,
+            squash: (
+                sm: 100,
+                md: 75,
+                rg: 50
+            )
+        ),
+        desktop: (
+            width: 1600,
+            squash: (
+                sm: 480,
+                md: 300,
+                rg: 200
+            )
+        ),
+        squash : (
+            value: 50,
+        )
+    ),
+);
+
+/*---------------------------------------------*\
+ *    3. Section Breaks
+/*---------------------------------------------*/
+
+    $wrap-padding--xs: 2.5;
+    $wrap-padding--sm: 5;
+    $wrap-padding--md: 10;
+    $wrap-padding--lg: 15;
+    $wrap-padding--xlg: 40;
+
+/*---------------------------------------------*\
+ *    4. Grid
+/*---------------------------------------------*/
+
+    $grid : (
+        gutter : (
+            xs : 10,
+            sm : 30,
+            md : 40,
+            lg : 50,
+            xlg : 100
+        )
+    );
+
+/*---------------------------------------------*\
+ *    5. Colours
+/*---------------------------------------------*/
+
+    $tundora: #4d4d4d;
+    $doveGrey: #646464;
+    $mercury: #e1e1e1;
+    $silver: #cdcdcd;
+    $alabaster: #fafafa;
+    $white: #fff;
+    $shilo: #e6a1a1;
+
+    $link-color: $shilo;
+    $link-visited-color: darken($link-color, 25%);
+    $link-hover-color: lighten($link-color, 10%);
+
+    $base-color: $mercury;
+
+/*---------------------------------------------*\
+ *    6. Typography
+/*---------------------------------------------*/
+
+    @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700|Zilla+Slab:400,700');
+
+    $heading-baseline: 0.155;
+    $heading-font: ('Zilla Slab', serif);
+
+    $body-baseline: 0.144500;
+    $body-font: ('Source Sans Pro', sans-serif);
+
+    $gh: 8;
+
+/*---------------------------------------------*\
+ *    7. Components
+/*---------------------------------------------*/
+    /*---------------------------------------------*\
+     *    1. Buttons
+    /*---------------------------------------------*/
+
+        $btn: (
+            icon: (
+                dimensions: (
+                    width: 16px,
+                    height: 16px
+                )
+            ),
+            font-size: 13px,
+            line-height: 15px,
+            padding: (
+                side: 20px,
+                )
+
+        );
+    /*---------------------------------------------*\
+     *    2. Blocks
+    /*---------------------------------------------*/
+
+        $block: (
+            padding: (
+                xs: 10px,
+                sm: 15px,
+                md: 20px,
+                lg: 25px
+            ),
+            font-size: 13px,
+            line-height: 15px
+        );
+
+    /*---------------------------------------------*\
+     *    3. Icons
+    /*---------------------------------------------*/
+
+        $icon: (
+            sm: 15,
+            md: 20,
+            lg: 30
+        );
+
+/*---------------------------------------------*\
+ *   Includes
+/*---------------------------------------------*/
+
+    @import "mixins/all";

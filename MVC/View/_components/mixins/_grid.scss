@@ -1,0 +1,34 @@
+@mixin grid( $item: "*", $gutter: 30px, $width: '', $width2: '')
+{
+    & > #{$item}
+    {
+        @if $width != nil { width: $width }
+        @if $gutter != nil { margin-right: $gutter }
+        &:last-of-type
+        {
+            margin-right: 0;
+        }
+    }
+    & > *:nth-child(2)
+    {
+        @if $width2 != nil { width: $width2 }
+    }
+}
+
+@mixin grid--gutter($dir, $gut)
+{
+    > *
+    {
+        margin-#{$dir}: #{ rem($gut) };
+    }
+}
+
+@mixin grid--gutter-last-of($dir, $gut)
+{
+    > * {
+        &:last-of-type:not(:first-child)
+        {
+            margin-#{$dir}: #{$gut}px;
+        }
+    }
+}

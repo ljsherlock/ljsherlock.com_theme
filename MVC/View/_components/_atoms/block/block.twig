@@ -1,0 +1,19 @@
+{#
+	* @desc         Create Blocks!
+	* @name         Block
+	* @author       ljsherlock
+	* @tested       Twig
+	* @requires     component.twig
+#}
+
+{% import 'macros.twig' as mcro %}
+
+{# merge the block into the passed elements and modifiers #}
+
+{% if bem is defined %}
+   {% set tmpClasses = [{ block: 'block' }]|merge( bem )  %}
+{% else %}
+   {% set tmpClasses = [{block: 'block'}] %}
+{% endif %}
+
+{{ mcro.createHTMLTag('div', attr, tmpClasses, innerHTML) }}
