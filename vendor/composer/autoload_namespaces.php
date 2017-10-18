@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Routes' => array($vendorDir . '/upstatement/routes'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Detection' => array($vendorDir . '/mobiledetect/mobiledetectlib/namespaced'),
 );
