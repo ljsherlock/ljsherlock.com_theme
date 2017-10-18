@@ -4,7 +4,8 @@
         "timber/timber": "^1.1",
         "solution10/calendar": "^1.1",
         "abraham/twitteroauth": "^0.7.2",
-        "clubduece/custom-sidebars": "^0.3.0"
+        "clubduece/custom-sidebars": "^0.3.0",
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
         "psr-4": {
