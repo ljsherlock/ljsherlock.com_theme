@@ -5,11 +5,12 @@ php:
   - 7.0
 
 before_install:
-  - pear install pear/PHP_CodeSniffer
-  - phpenv rehash
+  - composer require phpunit/phpunit:4.8.* satooshi/php-coveralls:dev-master
 
 install: composer install --no-dev --no-scripts --quiet --optimize-autoloader
 
-before_script: composer require atoum/atoum
+script:
+- ./vendor/bin/phpunit --coverage-clover ./tests/logs/clover.xml
 
-script: vendor/bin/atoum
+after_script:
+- php vendor/bin/coveralls -v
