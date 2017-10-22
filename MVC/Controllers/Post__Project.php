@@ -5,7 +5,7 @@ namespace MVC\Controllers;
 class Project extends Base
 {
     protected $modelName = "Post__Project";
-    protected $template = "_pages/project/project";
+    protected $template = "pages/project/project";
 }
 
 // default block template ('.block' has default padding, which can be overidden)

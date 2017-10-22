@@ -1,0 +1,32 @@
+{
+  "name": "standard-grunt",
+  "version": "0.0.0",
+  "description": "Standard Grunt setup",
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "7.1.5",
+    "cheerio": "^0.22.0",
+    "cssnano": "3.10.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-convert-svg-to-png": "1.1.0",
+    "grunt-postcss": "0.9.0",
+    "grunt-real-favicon": "0.2.2",
+    "grunt-scss-lint": "0.5.0",
+    "grunt-shell": "^1.3.0",
+    "grunt-svgmin": "^3.3.0",
+    "grunt-svgstore": "^1.0.0",
+    "pixrem": "4.0.1",
+    "stylelint": "8.2.0",
+    "stylelint-config-recommended": "1.0.0",
+    "uglifycss": "0.0.21",
+    "webpack": "^2.6.1"
+  },
+  "dependencies": {
+    "plumber-sass": "0.7.7"
+  }
+}

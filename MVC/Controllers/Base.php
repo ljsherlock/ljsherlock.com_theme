@@ -56,9 +56,9 @@ abstract class Base
         // Pass base template locations
         $this->timber = new \MVC\Workers\Timber( array(
             dirname(__DIR__) . "/View",
-            dirname(__DIR__) . "/View/_components",
-            dirname(__DIR__) . "/View/_app",
-            dirname(__DIR__) . "/View/_macros",
+            dirname(__DIR__) . "/View/components",
+            dirname(__DIR__) . "/View/base",
+            dirname(__DIR__) . "/View/macros",
         ));
 
         // Create the dynamic model name

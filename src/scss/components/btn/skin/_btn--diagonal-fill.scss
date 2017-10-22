@@ -1,0 +1,79 @@
+/*---------------------------------------------*\
+*    button--naked.scss
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+    %btn--diagonal-fill {
+        @extend %btn--icon-after;
+        @extend %btn--border;
+        @extend %filling;
+
+        padding-left: 17px;
+        height: 50px;
+        border-width: 2px;
+        overflow: hidden;
+
+        span {
+            line-height: 47px;
+            @include transition(font-size .5s ease);
+        }
+        &:after {
+            right: 100%;
+        }
+        &:hover {
+            right: 0;
+            color: white;
+            fill: white;
+        }
+    }
+
+
+        %btn--diagonal-fill
+        {
+            border-color: $shilo;
+            color: $shilo;
+            fill: $shilo;
+            &:after
+            {
+                background-color: $shilo;
+            }
+            &:hover
+            {
+                fill: white;
+                %btn__text
+                {
+                    color: white;
+                }
+            }
+        }
+
+
+    %dark {
+        %btn--diagonal-fill
+        {
+            border-color: white;
+            fill: white;
+            &:after {
+                background-color: white;
+            }
+            &:hover {
+                color: $shilo;
+                fill: $shilo;
+            }
+        }
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/
+
+    .btn--diagonal-fill { @extend %btn--diagonal-fill; }
+    .btn__text { @extend %btn__text; }

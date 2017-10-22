@@ -1,0 +1,56 @@
+{# base/select/select.twig #}
+
+{#
+   Select
+   From the provided options, we generate a select elemnt.
+   @bem {Array} (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @attrs {Array} (optional)
+   {
+      Mixed
+   }
+   @options {array} ()
+      {
+         value {String}
+         text {String}
+         default {bolean} true/false (Whether or not the option is the default to be displayed)
+      }
+#}
+
+{# Parameters #}
+{% set selectBem = bem ?? null %}
+{% set selectAttrs = attrs ?? null %}
+{% set selectOptions = options ?? null %}
+
+{# Variables #}
+{% set selectDefaultAttrs = { selected: 'selected', disabled: 'disabled', value: '0' } %}
+
+{# Output #}
+{% if selectOptions %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set selectHTML %}
+
+      {% for option in options %}
+
+         {% if option.default == true %}
+            {{ mcro.createHTMLTag( 'option', selectDefaultAttrs, [], option.text ) }}
+         {% endif %}
+         {% if option.selected == true %}
+            {{ mcro.createHTMLTag( 'option', { value: option.value, selected: true }, [], option.text ) }}
+         {% else %}
+            {{ mcro.createHTMLTag( 'option', { value: option.value }, [], option.text ) }}
+         {% endif %}
+
+      {% endfor %}
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag( 'select', selectAttrs, Selectbem, selectHTML ) }}
+
+{% endif %}

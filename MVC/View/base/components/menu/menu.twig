@@ -1,0 +1,59 @@
+{# base/components/menu/menu.twig #}
+
+{#
+   Menu
+   From the menu object create a menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Timber Menu Object}
+#}
+
+{# Parameters #}
+{% set navMenu = menu ?? null %}
+{% set navAttrs = attrs ?? null %}
+{% set navBem = bem ?? null %}
+
+{# Variables #}
+{% set navBemDefault = [{ block: 'nav' }] %}
+{% set navBtnBem = [{block: 'nav', element: 'item'}] %}
+{% set navBem = (navBem) ? navBem|merge( navBemDefault ) : navBemDefault %}
+
+{# Output #}
+{% if navMenu %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set navHTML %}
+
+      {% for item in navMenu %}
+
+         {# Loop Variables #}
+         {% set btnIcons = item.icons ?? null %}
+         {% set btnIcon = item.icon ?? null %}
+         {% set btnTexts = item.texts ?? null %}
+         {% set btnText = item.title ?? null %}
+         {% set btnLink = item.link ?? null %}
+
+         {% include 'components/btn/btn.twig' with {
+         text: { value: btnText },
+         texts: btnTexts,
+         attrs: { href: btnLink },
+         icons: btnIcons,
+         icon: btnIcon,
+         bem: navBtnBem } %}
+
+      {% endfor %}
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag( 'nav', navAttrs, navBem, navHTML ) }}
+
+{% endif %}

@@ -1,0 +1,35 @@
+{# pages/archive/work.twig #}
+
+{#
+   Work Archive Page
+   @param {Post Object} post
+#}
+
+{# Parameters #}
+{% set archiveWorkPosts = posts ?? null %}
+
+{# Variables #}
+{% set archiveWorkBem = [ { block: 'posts', modifier: ['work'] }] %}
+{% set archiveWorkPostsTemplate = 'components/article/work.twig' %}
+{% set postArchiveBem = [{ block: 'archive' }] %}
+
+{# Output #}
+{% extends 'templates/page.twig' %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% block page %}
+
+      {% set archiveWorkHTML %}
+
+         {% include 'components/posts/posts.twig' with {
+            posts: archiveWorkPosts,
+            template: archiveWorkPostsTemplate,
+            bem: archiveWorkBem
+         } %}
+
+      {% endset %}
+
+      {{ mcro.createHTMLTag( 'div', {}, postArchiveBem, archiveWorkHTML ) }}
+
+   {% endblock %}

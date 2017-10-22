@@ -1,0 +1,34 @@
+
+{% extends 'templates/global.twig' %}
+
+{% block main %}
+
+   {% include ['components/header/header.twig', 'base/components/header/header.twig' ] %}
+
+   {% set appInnerHTML %}
+
+      <div class="wrap">
+         {% block app %}{% endblock %}
+      </div>
+
+      {% block after_app %}{% endblock %}
+
+   {% endset %}
+
+   {% if request_body.ajax == 1 %}
+
+      {{ appInnerHTML }}
+
+   {% else %}
+
+      {{ mcro.createHTMLTag('main', {
+         post_type: post.post_type,
+         page_id: post.ID,
+         parent_id: function("wp_get_post_parent_id", post.id )
+      }, [], appInnerHTML) }}
+
+   {% endif %}
+
+   {% include ['components/footer/footer.twig', 'components/footer/footer.twig'] %}
+
+{% endblock %}

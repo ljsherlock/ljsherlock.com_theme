@@ -1,0 +1,168 @@
+/*---------------------------------------------*\
+*    button--text.scss
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+    %flex {
+       // width: 100%;
+       // Removed because interfering with nav flow
+       @include flexbox;
+    }
+
+    %flex--row {
+        @include flex-flow( row );
+        > *
+        {
+            float: left;
+        }
+        &:after
+        {
+           content: "";
+           display: table;
+           clear: both;
+         }
+    }
+
+    %flex--col {
+       @include flex-flow( column );
+    }
+
+    %flex--row-collapse {
+        @include mobile {
+            @include flex-flow( column );
+        };
+    }
+
+    // Flexbox Justify Content
+    //
+    // The 'justify-content' property aligns flex items along the main axis
+    // of the current line of the flex container. This is done after any flexible
+    // lengths and any auto margins have been resolved. Typically it helps distribute
+    // extra free space leftover when either all the flex items on a line are
+    // inflexible, or are flexible but have reached their maximum size. It also
+    // exerts some control over the alignment of items when they overflow the line.
+
+        %flex--just-center {
+            @include flex-just( center );
+        }
+
+        %flex--just-start {
+            @include flex-just( flex-start );
+        }
+
+        %flex--just-end {
+            @include flex-just( flex-end );
+        }
+
+        %flex--just-space-between {
+           @include flex-just( space-between );
+        }
+
+    // Flexbox Align Items
+    //
+    // Flex items can be aligned in the cross axis of the current line of the
+    // flex container, similar to 'justify-content' but in the perpendicular
+    // direction. 'align-items' sets the default alignment for all of the flex
+    // container's items, including anonymous flex items. 'align-self' allows
+    // this default alignment to be overridden for individual flex items. (For
+    // anonymous flex items, 'align-self' always matches the value of 'align-items'
+    // on their associated flex container.
+
+        %flex--align-items-start {
+            @include align-items( flex-start );
+        }
+
+        %flex--align-items-end {
+            @include align-items( flex-end );
+        }
+
+        %flex--align-items-center {
+           vertical-align: middle;
+           @include align-items( center );
+        }
+
+        %flex--center {
+           vertical-align: middle;
+           @include align-items( center );
+           @include flex-just( center );
+        }
+
+
+    %flex--no-shrink {
+        @include flex-shrink( 0 );
+    }
+
+    %flex--wrap {
+        @include flex-wrap(wrap);
+    }
+
+    %flex--no-wrap {
+        @include flex-wrap( nowrap );
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+
+    .flex {
+        @extend %flex;
+    }
+
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/
+
+    .flex--row {
+        @extend %flex;
+        @extend %flex--row;
+    }
+
+    .flex--col {
+        @extend %flex;
+        @extend %flex--col;
+    }
+
+
+    // Flexbox Justify Content
+
+        .flex--just-center {
+            @extend %flex--just-center;
+        }
+
+        .flex--just-end {
+            @extend %flex--just-end;
+        }
+
+        .flex--just-start {
+            @extend %flex--just-start;
+        }
+
+        .flex--just-space-between {
+            @extend %flex--just-space-between;
+        }
+
+
+    // Flexbox Align Items
+
+        .flex--align-items-start {
+            @extend %flex--align-items-start;
+        }
+
+        .flex--align-items-end {
+            @extend %flex--align-items-end;
+        }
+
+        .flex--align-items-center {
+            @extend %flex--align-items-center;
+        }
+
+    .flex--center {
+        @extend %flex--center;
+    }
+
+.flex--wrap { @extend %flex--wrap; }

@@ -1,0 +1,125 @@
+%intro
+{
+    position: relative;
+    z-index: 0;
+    @extend %wrap;
+
+    %intro__rect
+    {
+        content: '';
+        width: 200vw;
+        height: 65%;
+        background-color: $shilo;
+        position: absolute;
+        left: -50vw;
+        right: 0;
+        top: 10vh;
+        @include transform(rotate(-8deg));
+        z-index: 0;
+    }
+
+    %intro__header
+    {
+        margin-top: 20vh;
+        %intro__top
+        {
+            position: relative;
+            width: 100%;
+        }
+        position: relative;
+        z-index: 2;
+        @extend %flex;
+        @extend %flex--col;
+        @extend %flex--center;
+        @include mobile()
+        {
+            display: none;
+        };
+    }
+
+    %intro__logo
+    {
+        z-index: 1;
+        font-size: 4px;
+        @extend %grid;
+        @extend %grid--col;
+        @extend %grid--gutter-xs-bottom;
+        @extend %flex--center;
+        width: 25%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        %intro__icon
+        {
+            @include desktop()
+            {
+                width: 175px;
+                height: 175px;
+            };
+        }
+        %intro__name
+        {
+            font-size: 9.5em;
+            // color: white;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    %intro__caption
+    {
+        bottom: 0;
+        margin: auto;
+        text-transform: uppercase;
+        top: 20%;
+        top: 20vh;
+        color: $doveGrey;
+        &--left {
+            position: absolute;
+            left: 0;
+            transform-origin: left top 0;
+            @include transform( rotate(-90deg) );
+        }
+        &--right {
+            position: absolute;
+            right: 0;
+            transform-origin: right top 0;
+            @include transform( rotate(90deg) );
+            // color: white;
+        }
+    }
+
+    %intro__content
+    {
+        @extend %wrap--md;
+        position: relative;
+        margin-top: 10vh;
+        %intro__content-inner
+        {
+            @extend %grid;
+            @extend %grid--col;
+            @extend %flex--align-items-center;
+            @extend %grid--gutter-md-bottom;
+            @include padding-all($top: 4.5, $bottom: 8.5, $units: 'em');
+            .typography > *
+            {
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+.intro { @extend %intro; }
+.intro__header { @extend %intro__header; }
+.intro__top { @extend %intro__top; }
+.intro__logo { @extend %intro__logo; }
+.icon { @extend %intro__icon; }
+.intro__rect { @extend %intro__rect; }
+.intro__name { @extend %intro__name; }
+
+.intro__caption { @extend %intro__caption; }
+.intro__caption--left { @extend %intro__caption--left; }
+.intro__caption--right { @extend %intro__caption--right; }
+
+.intro__content { @extend %intro__content; }
+.intro__content-inner { @extend %intro__content-inner; }

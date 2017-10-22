@@ -1,0 +1,39 @@
+{# pages/archive/post.twig #}
+
+{#
+   Archive Post Page
+   @param {Post Object} post
+#}
+
+{# Parameters #}
+{% set postPosts = posts ?? null %}
+
+{# Variables #}
+{% set archivePostBem = [{ block: 'posts', modifier: ['post'] }] %}
+{% set archivePostPostsTemplate = 'components/article/post.twig' %}
+{% set postArchiveBem = [{ block: 'archive' }] %}
+
+{# Output #}
+{% extends 'templates/page.twig' %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% block page %}
+
+      {% set postArchiveHTML %}
+
+         {% include 'components/posts/posts.twig' with {
+            posts: postPosts,
+            template: archivePostPostsTemplate,
+            bem:  archivePostBem
+         } %}
+
+         <div class="pagination">
+
+         </div>
+
+      {% endset %}
+
+      {{ mcro.createHTMLTag( 'div', {}, postArchiveBem, postArchiveHTML ) }}
+
+   {% endblock %}

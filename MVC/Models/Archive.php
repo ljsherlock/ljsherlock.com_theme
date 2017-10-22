@@ -33,7 +33,15 @@ class Archive extends Single
     public function get()
     {
         $this->posts = $this->query($this->args);
-        $termObj = get_term_by( 'slug', $this->args['term'], $this->args['tax']->name );
+
+        if ( isset( $this->args['term'], $this->args['tax'] ) ) {
+          $termObj = get_term_by( 'slug', $this->args['term'], $this->args['tax']->name );
+          if ( $termObj ) {
+            $this->timber->addContext(array(
+              'termName' => $termObj->name,
+            ));
+          }
+        }
 
         $this->timber->addContext(array(
             'posts' => $this->addTerms( $this->posts ),
@@ -41,7 +49,6 @@ class Archive extends Single
             'postObj' => $this->postObj,
             'termObj' => $this->get_term_obj(),
             'taxObj' => $this->get_tax_obj(),
-            'termName' => $termObj->name,
         ));
 
         return parent::get();

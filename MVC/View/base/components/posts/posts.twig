@@ -1,0 +1,49 @@
+{# base/components/posts/posts.twig #}
+
+{#
+   Posts
+   Loop through the posts array and render the template passed.
+
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {String} template Template to render in the loop
+#}
+
+{# Parameters #}
+{% set postsBem = bem ?? null %}
+{% set postsAttrs = attrs ?? null %}
+{% set postsArray = posts ?? null %}
+{% set postsTemplate = template ?? null %}
+
+{# Variables #}
+{% set postsBemDefault = [{ block: 'posts'}] %}
+{% set postsBem = (postsBem) ? bem|merge( postsBemDefault ) : postsBemDefault %}
+{% set postsTemplateDefault = 'components/post-link/post-link.twig' %}
+{% set postsTemplate = postsTemplate ?? postsTemplateDefault %}
+
+{# Output #}
+{% if postsArray %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% set postsInnerHTML %}
+
+      {% for post in postsArray %}
+
+         {% include postsTemplate with { post: post, attrs: {}, bem: [] } %}
+
+      {% endfor %}
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag('div', postsAttrs, postsBem, postsInnerHTML) }}
+
+{% endif %}

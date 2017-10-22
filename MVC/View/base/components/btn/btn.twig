@@ -1,0 +1,105 @@
+{# base/components/btn/btn.twig #}
+
+{#
+   Btn
+   Create a button
+
+   @param {Array} bem (optional)
+   {
+       block {String}
+       element {String}
+       modifier {Array}
+   }
+    @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Array} text
+   {
+      {Array} attrs (optional)
+      {Array} bem (as above)
+      {String} text
+   }
+   @param {Array} texts
+   {
+      {Array} attrs (optional)
+      {Array} bem (as above)
+      {String} text
+   }
+   @param {Array} icons (optional)
+   {
+      {String} name
+      {Array} bem (option)
+   }
+   @param {Array} icon (optional)
+   {
+      {String} name
+      {Array} bem (option)
+   }
+   @param {Bolean} non_anchor (use span instead of anchor)
+   @param {String} rawSVG (Output raw svg instead of use:href)
+#}
+
+{# Parameters #}
+{% set btnBem = bem ?? null %}
+{% set btnAttrs = attrs ?? null %}
+{% set btnText = text ?? null %}
+{% set btnTexts = texts ?? null %}
+{% set btnElement = ( non_anchor == true ) ? 'span' : 'a' %}
+{% set btnRawSVG = rawSVG ?? '' %}
+{% set btnIcons = icons ?? null %}
+{% set btnIcon = icon ?? null %}
+
+{# Variables #}
+{% set btnBemDefault = [ { block: 'btn' } ] %}
+{% set btnBem = (btnBem) ? btnBem|merge(btnBemDefault) : btnBemDefault %}
+{% set btnTextBem = [ {block: 'btn', element: 'text' } ] %}
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+{% set btnHTML %}
+   {% spaceless %}
+   {% if btnTexts %}
+
+      {% for item in btnTexts %}
+
+         {% if item.bem %}
+            {% set tmpAttributes = item.bem|merge( btnTextBem ) %}
+         {% else %}
+            {% set tmpAttributes = btnTextBem %}
+         {% endif %}
+
+         {{ mcro.createHTMLTag( 'span', item.attrs, tmpAttributes, item.value ) }}
+
+      {% endfor %}
+
+   {% elseif btnText %}
+
+      {% if btnText.bem %}
+         {% set tmpAttributes = btnText.bem|merge( btnTextBem ) %}
+      {% else %}
+         {% set tmpAttributes = btnTextBem %}
+      {% endif %}
+
+      {{ mcro.createHTMLTag( 'span', btnText.attrs, tmpAttributes, btnText.value ) }}
+
+   {% endif %}
+
+   {% if btnIcons %}
+
+      {% for item in btnIcons %}
+         {% include 'components/icon/icon.twig' with { icon: item.name } %}
+      {% endfor %}
+
+   {% elseif btnIcon %}
+      {% include 'components/icon/icon.twig' with { icon: btnIcon } %}
+   {% endif %}
+
+   {% if btnRawSVG %}
+      {{ btnRawSVG }}
+   {% endif %}
+   {% endspaceless %}
+{% endset %}
+
+{{ mcro.createHTMLTag( btnElement, btnAttrs, btnBem, innerHTML ~ btnHTML ) }}

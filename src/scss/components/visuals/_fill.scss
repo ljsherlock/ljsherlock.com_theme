@@ -1,0 +1,43 @@
+/*---------------------------------------------*\
+*    button--wide.scss
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    RELATIONSHIPS
+/*---------------------------------------------*/
+
+    %fill {
+        @include positional-pseudo($pseudo: 'after') {
+          height: 100%;
+          width: 100%;
+        };
+        position: relative;
+        overflow: hidden;
+    }
+
+    %filling {
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+        @include positional-pseudo($top: -260px, $right: 100%, $left: auto, $pseudo: 'after') {
+            z-index: 1;
+            @include transition( right 0.5s ease );
+            @include transform( rotate(130deg) );
+            width: 400px;
+            height: 800px;
+        };
+        &.hover, &:hover {
+            &:after {
+                right: -100%;
+            }
+        }
+    }
+
+/*---------------------------------------------*\
+*    BLOCK
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    ELEMENT
+/*---------------------------------------------*/
+/*---------------------------------------------*\
+*    MODIFIER
+/*---------------------------------------------*/

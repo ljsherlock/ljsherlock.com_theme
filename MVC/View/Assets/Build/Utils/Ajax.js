@@ -1,1 +1,0 @@
-define(["Util"],function(t){return{put:function(t,e,n){var s=new XMLHttpRequest;if(console.log(t),s.open("PUT",t.url),s.setRequestHeader("Content-Type","application/json"),""!=t){var o=JSON.stringify(t);s.send(o)}return s.onload=function(){200===s.status?e(s.responseText):200!==s.status&&("function"==typeof n?alert("Request failed.  Returned status of "+s.status):n())},s}}});

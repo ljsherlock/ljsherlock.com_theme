@@ -1,8 +1,0 @@
-
-Lib/requireConfig.js
-----------------
-Lib/requireConfig.js
-Lib/appConfig.js
-Lib/util.js
-Core.js
-App.js

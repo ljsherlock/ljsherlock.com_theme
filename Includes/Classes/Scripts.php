@@ -23,7 +23,7 @@ class Scripts
         *   CSS
         ----------------------------------------------------*/
 
-             wp_register_style( 'style' , LJS_CSS . '/style.min.css', false, '1.0.0' );
+             wp_register_style( 'style' , LJS_THEME_URL . '/dist/css//style.min.css', false, '1.0.0' );
              wp_enqueue_style( 'style' );
 
          /*----------------------------------------------------

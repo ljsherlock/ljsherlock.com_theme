@@ -1,0 +1,40 @@
+{# base/components/social-icons/social-icons.twig #}
+
+{#
+   Social Icons
+   Use an array of icons and links to create an icon menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Array} icons
+      {
+         icon {String}
+         link {String}
+      }
+#}
+
+{# Parameters #}
+{% set navAttrs = attrs ?? null %}
+{% set navBem = bem ?? null %}
+{% set socialIconsArray = icons ?? null %}
+{% set socialIconsBem = bem ?? null %}
+{% set socialIconsBemDefault = [{ block: 'nav', modifier: ['social-media'] }] %}
+
+{# Variables #}
+{% set socialIconsBem = (socialIconsBem) ? socialIconsBem|merge( socialIconsBemDefault ) : socialIconsBemDefault %}
+
+{# Output #}
+{% if socialIconsArray %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% include 'components/menu/menu.twig' with { menu: socialIconsArray, bem: socialIconsBem } %}
+
+{% endif %}

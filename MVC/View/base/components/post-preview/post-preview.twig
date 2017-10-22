@@ -1,0 +1,49 @@
+{# base/components/post/post.twig #}
+
+{#
+   Post
+   Default post
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+   @param {Post Object} post
+#}
+
+{# Parameters #}
+{% set postBem = bem ?? null %}
+{% set postAttrs = attrs ?? null %}
+{% set postObj = post ?? null %}
+
+{# Variables #}
+{% set postBemDefault = [{ block: 'posts', element: 'post' }] %}
+{% set postBem = (postBem) ? bem|merge( postBemDefault ) : postBemDefault %}
+
+{# Output #}
+{% if postObj %}
+
+   {% import 'macros.twig' as mcro %}
+
+   {% set postInnerHTML %}
+
+      {{ mcro.createHTMLTag('h3', {}, [],  postObj.title) }}
+
+      <div class="typography">
+
+         {{ mcro.createHTMLTag('p', {}, [], postObj.get_preview(40, false, '') ) }}
+
+      </div>
+
+      {% include 'components/btn/btn.twig' with { attrs: { href: post.link }, text: { value: 'Read More' } } %}
+
+   {% endset %}
+
+   {{ mcro.createHTMLTag( 'div', postAttrs, postBem, postInnerHTML ) }}
+
+{% endif %}

@@ -64,28 +64,15 @@ To generate `.pot`, `.po` and `.mo` files, you need a tool that supports parsing
 
 ### Generating l10n files with Poedit 1.x
 
-Internationalization functions in Twig files are not automatically parsed by gettext in Poedit 1.x. The are multiple workarounds listed below.
+Internationalization functions in Twig files are not automatically parsed by gettext in Poedit 1.x. The quick and dirty workaround is to start each .twig file with `{#<?php#}`. By doing this, gettext will interpret whatever comes next as PHP, and start looking for `__`.
 
-**Note however that the first two methods may miss some strings**. Quotes can cause gettext to skip over `__` calls. Here’s an example for a string in an HTML attribute that won’t be recognized:
+* * *
 
-```twig
-<nav aria-label="{{ __('Main menu', 'my-textdomain') }}" />
-```
+Another solution is [Twig-Gettext-Extractor](https://github.com/umpirsky/Twig-Gettext-Extractor), a special Twig parser for Poedit. The linked page contains instructions on how to set it up.
 
-As a workaround, you could assign the translation to a variable, which you can then use in the attribute.
+* * *
 
-```twig
-{% set nav_aria_label = __('Main Menu', 'my-text-domain') %}
-<nav aria-label="{{ nav_aria_label }}">
-```
-
-#### Let gettext parse Twig files as PHP files
-
-The quick and dirty workaround is to start each Twig file with `{#<?php#}`. By doing this, gettext will interpret whatever comes next as PHP, and start looking for `__`.
-
-#### Use a custom Python parser
-
-Alternatively, you can use a custom parser for Python instead. This will throw a warning or two, but *most* of your strings are extracted! ("Most" because this method has the same problems with quotes as the PHP workaround above.) To add the parser, follow these steps:
+Alternatively, you can use a custom parser for Python instead. This will throw a warning or two, but your strings are extracted! To add the parser, follow these steps:
 
 1. Create a Poedit project for your theme if you haven't already, and make sure to add `__` on the _Sources keywords_ tab.
 2. Go to _Edit_ > _Preferences_.
@@ -98,6 +85,15 @@ Alternatively, you can use a custom parser for Python instead. This will throw a
     * Source code charset: `--from-code=%c`
 4. Save and Update!
 
-#### Use Twig Gettext Extractor
+Be aware that with the Python parser, strings **inside HTML attributes** will not be recognized. This will not work:
 
-Another solution is [Twig Gettext Extractor](https://github.com/umpirsky/Twig-Gettext-Extractor), a special Twig parser for Poedit. The linked page contains instructions on how to set it up.
+```twig
+<nav aria-label="{{ __('Main Menu', 'my-text-domain') }}">
+```
+
+As a workaround, you can assign the translation to a variable, which you can then use in the attribute.
+
+```twig
+{% set nav_aria_label = __('Main Menu', 'my-text-domain') %}
+<nav aria-label="{{ nav_aria_label }}">
+```

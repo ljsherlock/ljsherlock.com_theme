@@ -8,22 +8,9 @@ use Timber\CoreInterface;
 use Timber\URLHelper;
 
 class MenuItem extends Core implements CoreInterface {
-	/**
-	 * @api
-	 * @var array Array of children of a menu item. Empty if there are no child menu items.
-	 */
-	public $children = array();
 
-	/**
-	 * @api
-	 * @var bool Whether the menu item has a `menu-item-has-children` CSS class.
-	 */
+	public $children;
 	public $has_child_class = false;
-
-	/**
-	 * @api
-	 * @var array Array of class names.
-	 */
 	public $classes = array();
 	public $class = '';
 	public $level = 0;
@@ -32,34 +19,6 @@ class MenuItem extends Core implements CoreInterface {
 
 	public $PostClass = 'Timber\Post';
 
-	/**
-	 * Inherited property. Listed here to make it available in the documentation.
-	 *
-	 * @api
-	 * @see _wp_menu_item_classes_by_context()
-	 * @var bool Whether the menu item links to the currently displayed page.
-	 */
-	public $current;
-
-	/**
-	 * Inherited property. Listed here to make it available in the documentation.
-	 *
-	 * @api
-	 * @see _wp_menu_item_classes_by_context()
-	 * @var bool Whether the menu item refers to the parent item of the currently displayed page.
-	 */
-	public $current_item_parent;
-
-	/**
-	 * Inherited property. Listed here to make it available in the documentation.
-	 *
-	 * @api
-	 * @see _wp_menu_item_classes_by_context()
-	 * @var bool Whether the menu item refers to an ancestor (including direct parent) of the
-	 *      currently displayed page.
-	 */
-	public $current_item_ancestor;
-
 	protected $_name;
 	protected $_menu_item_object_id;
 	protected $_menu_item_url;
@@ -67,7 +26,8 @@ class MenuItem extends Core implements CoreInterface {
 	protected $master_object;
 
 	/**
-	 * @internal
+	 *
+	 *
 	 * @param array|object $data
 	 */
 	public function __construct( $data ) {
@@ -83,9 +43,15 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Add a CSS class the menu item should have.
-	 *
-	 * @param string $class_name CSS class name to be added.
+	 * @return string the label for the menu item
+	 */
+	public function __toString() {
+		return $this->name();
+	}
+
+	/**
+	 * add a class the menu item should have
+	 * @param string  $class_name to be added
 	 */
 	public function add_class( $class_name ) {
 		$this->classes[] = $class_name;
@@ -93,10 +59,9 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Get the label for the menu item.
-	 *
+	 * The label for the menu item
 	 * @api
-	 * @return string The label for the menu item.
+	 * @return string
 	 */
 	public function name() {
 		if ( $title = $this->title() ) {
@@ -109,35 +74,18 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Magic method to get the label for the menu item.
-	 *
-	 * @api
-	 * @example
-	 * ```twig
-	 * <a href="{{ item.link }}">{{ item }}</a>
-	 * ```
-	 * @see \Timber\MenuItem::name()
-	 * @return string The label for the menu item.
-	 */
-	public function __toString() {
-		return $this->name();
-	}
-
-	/**
-	 * Get the slug for the menu item.
-	 *
+	 * The slug for the menu item
 	 * @api
 	 * @example
 	 * ```twig
 	 * <ul>
 	 *     {% for item in menu.items %}
-	 *         <li class="{{ item.slug }}">
-	 *             <a href="{{ item.link }}">{{ item.name }}</a>
+	 *         <li class="{{item.slug}}">
+	 *             <a href="{{item.link}}">{{item.name}}</a>
 	 *          </li>
 	 *     {% endfor %}
 	 * </ul>
-	 * ```
-	 * @return string The URL-safe slug of the menu item.
+	 * @return string the slug of the menu item kinda-like-this
 	 */
 	public function slug() {
 		if ( !isset($this->master_object) ) {
@@ -151,7 +99,7 @@ class MenuItem extends Core implements CoreInterface {
 
 	/**
 	 * @internal
-	 * @return mixed Whatever object (Post, Term, etc.) the menu item represents.
+	 * @return mixed whatever object (Post, Term, etc.) the menu item represents
 	 */
 	protected function get_master_object() {
 		if ( isset($this->_menu_item_object_id) ) {
@@ -160,51 +108,51 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Get link.
-	 *
 	 * @internal
-	 * @see \Timber\MenuItem::link()
-	 * @deprecated since 1.0
+	 * @see TimberMenuItem::link
+	 * @deprecated 1.0
 	 * @codeCoverageIgnore
-	 * @return string An absolute URL, e.g. `http://example.org/my-page`.
+	 * @return string an absolute URL http://example.org/my-page
 	 */
 	public function get_link() {
 		return $this->link();
 	}
 
 	/**
-	 * Get path.
-	 *
 	 * @internal
 	 * @codeCoverageIgnore
-	 * @see        \Timber\MenuItem::path()
-	 * @deprecated since 1.0
-	 * @return string A relative URL, e.g. `/my-page`.
+	 * @see TimberMenuItem::path()
+	 * @deprecated 1.0
+	 * @return string a relative url /my-page
 	 */
 	public function get_path() {
 		return $this->path();
 	}
 
 	/**
-	 * Add a new `Timber\MenuItem` object as a child of this menu item.
 	 *
-	 * @param \Timber\MenuItem $item The menu item to add.
+	 *
+	 * @param TimberMenuItem $item
 	 */
 	public function add_child( $item ) {
 		if ( !$this->has_child_class ) {
 			$this->add_class('menu-item-has-children');
 			$this->has_child_class = true;
 		}
+		if ( !isset($this->children) ) {
+			$this->children = array();
+		}
 		$this->children[] = $item;
 		$item->level = $this->level + 1;
-		if ( count($this->children) ) {
+		if ( $item->children ) {
 			$this->update_child_levels();
 		}
 	}
 
 	/**
+	 *
 	 * @internal
-	 * @return bool|null
+	 * @return boolean|null  
 	 */
 	public function update_child_levels() {
 		if ( is_array($this->children) ) {
@@ -217,11 +165,9 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Imports the classes to be used in CSS.
-	 *
+	 * Imports the classes to be used in CSS
 	 * @internal
-	 *
-	 * @param array|object $data
+	 * @param array|object  $data
 	 */
 	public function import_classes( $data ) {
 		if ( is_array($data) ) {
@@ -234,21 +180,9 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Get children of a menu item.
-	 *
-	 * You can also directly access the children through the `$children` property (`item.children`
-	 * in Twig).
 	 *
 	 * @internal
-	 * @example
-	 * ```twig
-	 * {% for child in item.get_children %}
-	 *     <li class="nav-drop-item">
-	 *         <a href="{{ child.link }}">{{ child.title }}</a>
-	 *     </li>
-	 * {% endfor %}
-	 * ```
-	 * @return array|bool Array of children of a menu item. Empty if there are no child menu items.
+	 * @return array|bool
 	 */
 	public function get_children() {
 		if ( isset($this->children) ) {
@@ -258,17 +192,13 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Checks to see if the menu item is an external link.
-	 *
-	 * If your site is `example.org`, then `google.com/whatever` is an external link. This is
-	 * helpful when you want to create rules for the target of a link.
-	 *
+	 * Checks to see if the menu item is an external link so if my site is `example.org`, `google.com/whatever` is an external link. Helpful when creating rules for the target of a link
 	 * @api
 	 * @example
 	 * ```twig
 	 * <a href="{{ item.link }}" target="{{ item.is_external ? '_blank' : '_self' }}">
 	 * ```
-	 * @return bool Whether the link is external or not.
+	 * @return bool
 	 */
 	public function is_external() {
 		if ( $this->type() != 'custom' ) {
@@ -278,33 +208,17 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Get the type of the menu item.
-	 *
-	 * Depending on what is the menu item links to. Can be `post_type` for posts, pages and custom
-	 * posts, `post_type_archive` for post type archive pages, `taxonomy` for terms or `custom` for
-	 * custom links.
-	 *
-	 * @api
+	 * Return the type of the menu item
 	 * @since 1.0.4
-	 * @return string The type of the menu item.
+	 * @return string
 	 */
 	public function type() {
 		return $this->_menu_item_type;
 	}
 
 	/**
-	 * Get a meta value of the menu item.
-	 *
-	 * Plugins like Advanced Custom Fields allow you to set custom fields for menu items. With this
-	 * method you can retrieve the value of these.
-	 *
-	 * @example
-	 * ```twig
-	 * <a class="icon-{{ item.meta('icon') }}" href="{{ item.link }}">{{ item.title }}</a>
-	 * ```
-	 * @api
-	 * @param string $key The meta key to get the value for.
-	 * @return mixed Whatever value is stored in the database.
+	 * @param string $key lookup key
+	 * @return mixed whatever value is storied in the database
 	 */
 	public function meta( $key ) {
 		if ( is_object($this->menu_object) && method_exists($this->menu_object, 'meta') ) {
@@ -318,39 +232,25 @@ class MenuItem extends Core implements CoreInterface {
 	/* Aliases */
 
 	/**
-	 * Get the child menu items of a `Timber\MenuItem`.
-	 *
+	 * Get the child [TimberMenuItems](#TimberMenuItem)s of a [TimberMenuItem](#TimberMenuItem)
 	 * @api
-	 * @example
-	 * ```twig
-	 * {% for child in item.children %}
-	 *     <li class="nav-drop-item">
-	 *         <a href="{{ child.link }}">{{ child.title }}</a>
-	 *     </li>
-	 * {% endfor %}
-	 * ```
-	 * @return array|bool Array of children of a menu item. Empty if there are no child menu items.
+	 * @return array|bool
 	 */
 	public function children() {
 		return $this->get_children();
 	}
 
 	/**
-	 * Check if a link is external.
-	 *
-	 * This is helpful when creating rules for the target of a link.
-	 *
-	 * @internal
-	 * @see \Timber\MenuItem::is_external()
-	 * @return bool Whether the link is external or not.
+	 * Checks to see if a link is external, helpful when creating rules for the target of a link
+	 * @see TimberMenuItem::is_external
+	 * @return bool
 	 */
 	public function external() {
 		return $this->is_external();
 	}
 
 	/**
-	 * Get the full link to a menu item.
-	 *
+	 * Get the full link to a Menu Item
 	 * @api
 	 * @example
 	 * ```twig
@@ -358,7 +258,7 @@ class MenuItem extends Core implements CoreInterface {
 	 *     <li><a href="{{ item.link }}">{{ item.title }}</a></li>
 	 * {% endfor %}
 	 * ```
-	 * @return string A full URL, like `http://mysite.com/thing/`.
+	 * @return string a full URL like http://mysite.com/thing/
 	 */
 	public function link() {
 		if ( !isset($this->url) || !$this->url ) {
@@ -372,64 +272,57 @@ class MenuItem extends Core implements CoreInterface {
 	}
 
 	/**
-	 * Get the link the menu item points at.
-	 *
+	 * Gets the link a menu item points at
 	 * @internal
-	 * @deprecated since 0.21.7 Use link method instead.
-	 * @see \Timber\MenuItem::link()
+	 * @deprecated since 0.21.7 use link instead
+	 * @see link()
 	 * @codeCoverageIgnore
-	 * @return string A full URL, like `http://mysite.com/thing/`.
+	 * @return string a full URL like http://mysite.com/thing/
 	 */
 	public function permalink() {
-		Helper::warn( '{{ item.permalink }} is deprecated, use {{ item.link }} instead' );
+		Helper::warn('{{item.permalink}} is deprecated, use {{item.link}} instead');
 		return $this->link();
 	}
 
 	/**
-	 * Get the relative path of the menu item’s link.
-	 *
-	 * @api
+	 * Return the relative path of a Menu Item's link
 	 * @example
 	 * ```twig
 	 * {% for item in menu.items %}
 	 *     <li><a href="{{ item.path }}">{{ item.title }}</a></li>
 	 * {% endfor %}
 	 * ```
-	 * @return string The path of a URL, like `/foo`.
+	 * @return string the path of a URL like /foo
 	 */
 	public function path() {
 		return URLHelper::get_rel_url($this->link());
 	}
 
 	/**
-	 * Get the public label for the menu item.
-	 *
-	 * @api
+	 * Gets the public label for the menu item
 	 * @example
 	 * ```twig
 	 * {% for item in menu.items %}
 	 *     <li><a href="{{ item.link }}">{{ item.title }}</a></li>
 	 * {% endfor %}
 	 * ```
-	 * @return string The public label, like "Foo".
+	 * @return string the public label like Foo
 	 */
 	public function title() {
 		if ( isset($this->__title) ) {
 			return $this->__title;
 		}
 	}
-
+	
 	/**
-	 * Get the featured image of the post associated with the menu item.
-	 *
-	 * @api
+	 * Gets the post thumbnail image object
 	 * @example
 	 * ```twig
 	 * {% for item in menu.items %}
 	 *     <li><a href="{{ item.link }}"><img src="{{ item.thumbnail }}"/></a></li>
 	 * {% endfor %}
 	 * ```
-	 * @return \Timber\Image|null The featured image object.
+	 * @return string the public thumbnail url
 	 */
 	public function thumbnail() {
 		if ( $this->menu_object && method_exists($this->menu_object, 'thumbnail')) {

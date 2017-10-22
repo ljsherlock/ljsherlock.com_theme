@@ -30,7 +30,11 @@ class Single extends Base
             array_merge( $this->sidebars, $this->args['sidebars'] ) ;
         }
 
-        $this->post = new \TimberPost();
+        if (isset( $this->args['slug'] )) {
+          $this->post = new \TimberPost( $this->args['slug'] );
+        } else  {
+          $this->post = new \TimberPost();
+        }
     }
 
     /**

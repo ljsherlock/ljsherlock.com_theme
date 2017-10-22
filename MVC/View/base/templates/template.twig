@@ -1,0 +1,71 @@
+{#
+ * @usedby global.twig
+ * @requires constants, mustard, icons
+#}
+
+<!DOCTYPE html>
+<html class="restrict smart-browser">
+    <head>
+        {% block head %}
+
+           <link rel="apple-touch-icon" sizes="57x57" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-57x57.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="60x60" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-60x60.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="72x72" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-72x72.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="76x76" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-76x76.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="114x114" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-114x114.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="120x120" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-120x120.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="144x144" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-144x144.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="152x152" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-152x152.png?v=WGLYX443lM">
+           <link rel="apple-touch-icon" sizes="180x180" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/apple-touch-icon-180x180.png?v=WGLYX443lM">
+           <link rel="icon" type="image/png" sizes="32x32" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/favicon-32x32.png?v=WGLYX443lM">
+           <link rel="icon" type="image/png" sizes="16x16" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/favicon-16x16.png?v=WGLYX443lM">
+           <link rel="manifest" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/manifest.json?v=WGLYX443lM">
+           <link rel="mask-icon" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/safari-pinned-tab.svg?v=WGLYX443lM" color="#e6a1a1">
+           <link rel="shortcut icon" href="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/favicon.ico?v=WGLYX443lM">
+           <meta name="msapplication-TileColor" content="#ffc40d">
+           <meta name="msapplication-TileImage" content="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/mstile-144x144.png?v=WGLYX443lM">
+           <meta name="msapplication-config" content="https://ljsherlock.com/app/themes/ljsherlock/dist/icons/favicon/browserconfig.xml?v=WGLYX443lM">
+           <meta name="theme-color" content="{{ meta.themeColour }}">
+
+            <meta charset="{{ function( 'bloginfo', 'charset' ) }}"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            {{ wp_head }}
+
+        {% endblock %}
+    </head>
+      <!--[if lt IE 7]>      <body class="ie6">    <![endif]-->
+      <!--[if IE 7]>         <body class="ie7">    <![endif]-->
+      <!--[if IE 8]>         <body class="ie8">    <![endif]-->
+      <!--[if IE 9]>         <body class="ie9">    <![endif]-->
+      <!--[if gt IE 9]>      <body class="ie10+">  <![endif]-->
+      <!--[if !IE]><!-->     <body>                <!--<![endif]-->
+
+         {% if mustard != true and icons != '' %}
+            {{ icons }}
+         {% endif %}
+
+         {% block body %}
+
+         {% endblock %}
+
+         <script>
+         var ajax_url = "{{ constant('LJS_AJAXURL') }}";
+
+         var require = {
+             baseUrl: "{{ constant('LJS_THEME_URL') ~ '/dist/js'}}",
+             paths: {
+                 Polyfills: 'lib/polyfills',
+                 Util: 'utils/util',
+                 Mustard: 'lib/mustard',
+                 Core: 'core',
+                 App: 'app',
+                 Config: 'lib/app-config',
+             }
+         };
+         </script>
+         <script src="{{ constant('LJS_THEME_URL') ~ '/dist/js/lib/require.js'}}" data-main="main"></script>
+
+
+     </body>
+</html>

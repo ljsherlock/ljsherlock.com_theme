@@ -1,0 +1,29 @@
+{# components/overlay/overlay.twig #}
+
+{#
+   Page Overlay
+   From the menu object create a menu
+   @param {Array} bem (optional)
+      {
+         block {String}
+         element {String}
+         modifier {Array}
+      }
+   @param {Array} attrs (optional)
+   {
+      Mixed
+   }
+#}
+
+{# Parameters #}
+{% set overlayBem = bem ?? null %}
+{% set overlayAttrs = attrs ?? null %}
+
+{# Variables #}
+{% set overlayBemDefault = [{ block: 'overlay'}] %}
+{% set overlayBem = (overlayBem) ? overlayBem : overlayBemDefault  %}
+
+{# Output #}
+{% import 'macros.twig' as mcro %}
+
+{{ mcro.createHTMLTag('div', overlayAttrs, overlayBem) }}

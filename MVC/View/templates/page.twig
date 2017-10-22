@@ -1,0 +1,13 @@
+{% extends ['templates/app.twig', 'base/templates/app.twig' ] %}
+
+{% import 'macros.twig' as mcro %}
+
+   {% block app %}
+
+      {% include 'components/page-header/page-header.twig' with { title: appPost.title, subtitle: subtitle } %}
+
+      {% block page %}
+
+      {% endblock %}
+
+   {% endblock %}

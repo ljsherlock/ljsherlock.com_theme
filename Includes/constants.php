@@ -16,7 +16,7 @@ if( isset( $_COOKIE['cuts-the-mustard'] ) )
 // Base locations
 define('LJS_ROOT', dirname(__FILE__));
 define('LJS_URL', esc_url( home_url( '/' ) ) );
-define('LJS_THEME_RURL', get_stylesheet_directory_uri());
+define('LJS_THEME_URL', get_stylesheet_directory_uri());
 
 // Server side
 // define('LJS_INC', LJS_ROOT . '/Includes');
@@ -24,7 +24,7 @@ define('LJS_THEME_RURL', get_stylesheet_directory_uri());
 //Client Side
 
 define('LJS_VIEW_DIR', LJS_ROOT . '/MVC/View');
-define('LJS_VIEW', LJS_THEME_RURL . '/MVC/View');
+define('LJS_VIEW', LJS_THEME_URL . '/MVC/View');
 
 define('LJS_ASSETS_DIR', LJS_VIEW_DIR . '/Assets');
 define('LJS_ASSETS', LJS_VIEW . '/Assets');
